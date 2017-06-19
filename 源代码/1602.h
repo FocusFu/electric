@@ -4,8 +4,8 @@
 /************************************位定义************************************/
 sbit dula  = P2^6;
 sbit wela  = P2^7;
-sbit rs    = P1^0;
-sbit rw    = P1^1;
+sbit RS    = P1^0;
+sbit RW    = P1^1;
 sbit lcden = P2^5;
 /******************************************************************************/
 /* 函数名称  : delay                                                          */
@@ -35,7 +35,7 @@ void delay(uint x)
 void write_com(uchar com)
 {
 	P0 = com;
-	rs = 0;
+	RS = 0;
 	lcden = 0;
 	delay(10);
 	lcden = 1;
@@ -52,7 +52,7 @@ void write_com(uchar com)
 void write_date(uchar date)
 {
 	P0 = date;
-	rs = 1;
+	RS = 1;
 	lcden = 0;
 	delay(10);
 	lcden = 1;
