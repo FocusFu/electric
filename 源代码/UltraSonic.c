@@ -6,7 +6,7 @@
 #define uchar unsigned char
 #define uint unsigned int
 #define VELOCITY_30C	3495       //30摄氏度时的声速，声速V= 331.5 + 0.6*温度； 
-#define VELOCITY_23C	3453       //23摄氏度时的声速，声速V= 331.5 + 0.6*温度； 
+//#define VELOCITY_23C	3453       //23摄氏度时的声速，声速V= 331.5 + 0.6*温度； 
 #define BASIC 3315
 #define lambda 6
 /************************************位定义************************************/
@@ -34,6 +34,7 @@ extern void initLCD();
 extern void write_date(uchar date);
 extern void write_com(uchar com);
 extern void delay(uint x);
+long int VELOCITY;       //23摄氏度时的声速，声速V= 331.5 + 0.6*温度；
 /******************************************************************************/
 /* 函数名称  : Delay_xMs                                                      */
 /* 函数描述  : 延时函数                                                       */
@@ -161,15 +162,37 @@ void display(int number,uchar address)
 /******************************************************************************/
 /* 函数名称  : Trig_SuperSonic                                                */
 /* 函数描述  : 发出声波函数                                                   */
-/* 输入参数  : 无                                                             */
-/* 参数描述  : 无                                                             */
+/* 输入参数  : i                                                              */
+/* 参数描述  : 发出的脉冲次数                                                 */
 /* 返回值    : 无                                                             */
 /******************************************************************************/
-void Trig_SuperSonic(void)//出发声波
+void Trig_SuperSonic(int i)//出发声波
 {
-	 OUTPUT = 1;
-	 delayt(1);
-	 OUTPUT = 0;
+	int j;
+	for(j=0;j<i;j++)
+	{
+		_nop_();
+		_nop_();
+		_nop_();
+		_nop_();
+		_nop_();
+		_nop_();
+	  _nop_();
+	  _nop_();
+	  _nop_();
+	  _nop_();
+	  OUTPUT = 1;
+	  _nop_();
+	 	_nop_();
+		_nop_();
+		_nop_();
+		_nop_();
+	  _nop_();
+	  _nop_();
+	  _nop_();
+			 _nop_();
+	  OUTPUT = 0;
+	}
 }
 /******************************************************************************/
 /* 函数名称  : Measure_Distance                                               */
@@ -178,14 +201,21 @@ void Trig_SuperSonic(void)//出发声波
 /* 参数描述  : 无                                                             */
 /* 返回值    : 无                                                             */
 /******************************************************************************/
-void Measure_Distance(void)
+int Measure_Distance(void)
 {
 	uchar l;
 	uint h,y;
 	TR0 = 1;
-	while(INPUT)
+	while(INPUT==0)
     {
-        ;
+        if(count==18)
+				{		
+					TR0 =0;
+		      TL0 = 0x66;
+		      TH0 = 0xfc;
+		      count = 0;
+				}
+				return 0;
     }	
 	TR0 = 0;
 	l = TL0;
@@ -196,7 +226,8 @@ void Measure_Distance(void)
 	TL0 = 0x66;
 	TH0 = 0xfc;
 	delayt(30);
-	distance = VELOCITY_30C * distance / 20000;
+	distance = VELOCITY * distance / 20000;
+	return 1;
 }
 /*****************************************************
 函数功能：判断液晶模块的忙碌状态
@@ -269,8 +300,8 @@ void WriteInstruction (unsigned char dictate)
 	  _nop_();
 	  _nop_();
 	  _nop_();
-	 _nop_();        //空操作四个机器周期，给硬件反应时间
-	 E=0;            //当E由高电平跳变成低电平时，液晶模块开始执行命令
+	  _nop_();        //空操作四个机器周期，给硬件反应时间
+	  E=0;            //当E由高电平跳变成低电平时，液晶模块开始执行命令
  }
 /*****************************************************
 函数功能：对LCD的显示模式进行初始化设置
@@ -285,12 +316,11 @@ void LcdInitiate(void)
 	  WriteInstruction(0x38);     //连续三次，确保初始化成功
 	  Delay_xMs(5);               //延时5ms　，给硬件一点反应时间
 	  WriteInstruction(0x0c);     //显示模式设置：显示开，无光标，光标不闪烁
-	Delay_xMs(5);               //延时5ms　，给硬件一点反应时间
-	WriteInstruction(0x06);     //显示模式设置：光标右移，字符不移
-	Delay_xMs(5);                //延时5ms　，给硬件一点反应时间
-	WriteInstruction(0x01);     //清屏幕指令，将以前的显示内容清除
-	Delay_xMs(5);             //延时5ms　，给硬件一点反应时间
-
+	  Delay_xMs(5);               //延时5ms　，给硬件一点反应时间
+	  WriteInstruction(0x06);     //显示模式设置：光标右移，字符不移
+	  Delay_xMs(5);                //延时5ms　，给硬件一点反应时间
+	  WriteInstruction(0x01);     //清屏幕指令，将以前的显示内容清除
+	  Delay_xMs(5);             //延时5ms　，给硬件一点反应时间
  } 
 /************************************************************************
 以下是DS18B20的操作程序
@@ -421,15 +451,15 @@ void 	display_dot(void)
 ***************************************************/   
 void 	display_cent(void)
 {
-           unsigned char i;    
-	 	     WriteAddress(0x0c);        //写显示地址，将在第2行第13列开始显示	
-			   i = 0;                    //从第一个字符开始显示 
-				while(Cent[i] != '\0')     //只要没有写到结束标志，就继续写
-				{					
-					WriteData(Cent[i]);     //将字符常量写入LCD
-					i++;                 //指向下一个字符
-					Delay_xMs(50);        //延时1ms给硬件一点反应时间
-				}	
+  unsigned char i;    
+	WriteAddress(0x0c);        //写显示地址，将在第2行第13列开始显示	
+	i = 0;                    //从第一个字符开始显示 
+	while(Cent[i] != '\0')     //只要没有写到结束标志，就继续写
+	{					
+	 WriteData(Cent[i]);     //将字符常量写入LCD
+	 i++;                 //指向下一个字符
+	 Delay_xMs(50);        //延时1ms给硬件一点反应时间
+	}	
 }
 /*****************************************************
 函数功能：显示温度的整数部分
@@ -484,6 +514,8 @@ void main(void)
   unsigned char TH;    //储存暂存器的温度高位
   unsigned char TN;      //储存温度的整数部分
 	unsigned char TD;       //储存温度的小数部分
+	int fflag;
+	VELOCITY=3453;       //23摄氏度时的声速，声速V= 331.5 + 0.6*温度；
   RW = 0;
 	initLCD();
 	Init_MCU();
@@ -501,23 +533,31 @@ void main(void)
   display_cent();      //显示温度的单位
 	while(1)
 	{
-		 Trig_SuperSonic();         //触发超声波发射
-		 while(INPUT == 0)          //等待回声
-         {
-             ;
-         }
-		 Measure_Distance();        //计算脉宽并转换为距离
+		 Trig_SuperSonic(8);         //触发超声波发射
+//		 while(INPUT == 0)          //等待回声
+//         {
+//             ;
+//         }
 		 ReadyReadTemp();     //读温度准备
 	   TL=ReadOneChar();    //先读的是温度值低位
 		 TH=ReadOneChar();    //接着读的是温度值高位
 		 TN=TH*16+TL/16;      //实际温度值=(TH*256+TL)/16,即：TH*16+TL/16
+			                  //这样得出的是温度的整数部分,小数部分被丢弃了
+		 VELOCITY=3315+6*TN;// 331.5 + 0.6*温度；
+		 fflag=Measure_Distance();        //计算脉宽并转换为距离
+//		 ReadyReadTemp();     //读温度准备
+//	   TL=ReadOneChar();    //先读的是温度值低位
+//		 TH=ReadOneChar();    //接着读的是温度值高位
+//		 TN=TH*16+TL/16;      //实际温度值=(TH*256+TL)/16,即：TH*16+TL/16
 			                  //这样得出的是温度的整数部分,小数部分被丢弃了
 	   TD=(TL%16)*10/16;    //计算温度的小数部分,将余数乘以10再除以16取整，
 			                  //这样得到的是温度小数部分的第一位数字(保留1位小数)
 	   display_temp1(TN);    //显示温度的整数部分
 	   display_temp2(TD);    //显示温度的小数部分
 		 display_char(table3,0x40);
+		 if(fflag){
 		 display(distance,0x49);    //显示距离
+		 }
 		 Init_Parameter();          // 参数重新初始化
 		 delayt(100);               //延时，两次发射之间要至少有10ms间隔
 	 }	
