@@ -44,20 +44,20 @@ long int VELOCITY;       //23ÉãÊÏ¶ÈÊ±µÄÉùËÙ£¬ÉùËÙV= 331.5 + 0.6*ÎÂ¶È£»
 /******************************************************************************/
 void Delay_xMs(unsigned int x)
 {
-    unsigned int i,j;
-    for(i = 0;i < x;i++ )
-    {
-        for(j = 0;j < 3;j++ )
-        {
-            ;
-        }
+	unsigned int i,j;
+  for(i = 0;i < x;i++ )
+	{
+		for(j = 0;j < 3;j++ )
+		{
+         ;
     }
+  }
 }
 /******************************************************************************/
 /* º¯ÊýÃû³Æ  : Alarm                                                          */
 /* º¯ÊýÃèÊö  : ·äÃùÆ÷·¢Éùº¯Êý                                                 */
 /* ÊäÈë²ÎÊý  : t                                                              */
-/* ²ÎÊýÃèÊö  : ·¢ÉùµÄ´ÎÊý                                                     */
+/* ²ÎÊýÃèÊö  : ·¢ÉùµÄ´ÆµÂÊ                                                     */
 /* ·µ»ØÖµ    : ÎÞ                                                             */
 /******************************************************************************/
 void Alarm(uchar t)
@@ -66,9 +66,9 @@ void Alarm(uchar t)
 	for(i = 0;i < t;i++)
 	{
 		Beep = 0;
-		Delay_xMs(1000);
+		Delay_xMs(1000/t);
 		Beep = 1;
-		Delay_xMs(1000);
+		Delay_xMs(1000/t);
 	}
 }	
 /******************************************************************************/
@@ -80,13 +80,13 @@ void Alarm(uchar t)
 /******************************************************************************/	
 void delayt(uint x)
 {
-    uchar j;
-    while(x-- > 0)
-    {
-  	    for(j = 0;j < 125;j++)
-        {
+	uchar j;
+  while(x-- > 0)
+		{
+			for(j = 0;j < 125;j++)
+			{
             ;
-        }
+      }
     }
 }
 /******************************************************************************/
@@ -113,8 +113,8 @@ void Init_MCU(void)
 /******************************************************************************/
 void Init_Parameter(void)
 {
-	 OUTPUT =1;
-	 INPUT = 1;
+	 OUTPUT =0;//³¬ÉùÊä³ö¹Ø±Õ
+	 INPUT = 0;//³¬ÉùÊäÈë¹Ø±Õ
 	 count = 0;
 	 distance = 0;
 }
@@ -149,7 +149,6 @@ void display(int number,uchar address)
 	c= (number / 100) % 10;
 	d = (number / 10) % 10;
 	e = number % 10;
-
 	write_com(0x80 + address);
   write_date(b + 48);
 	write_date(c + 48);
@@ -166,7 +165,7 @@ void display(int number,uchar address)
 /* ²ÎÊýÃèÊö  : ·¢³öµÄÂö³å´ÎÊý                                                 */
 /* ·µ»ØÖµ    : ÎÞ                                                             */
 /******************************************************************************/
-void Trig_SuperSonic(int i)//³ö·¢Éù²¨
+void Trig_SuperSonic(int i)//³ö·¢Éù²¨40kHz
 {
 	int j;
 	for(j=0;j<i;j++)
@@ -190,7 +189,7 @@ void Trig_SuperSonic(int i)//³ö·¢Éù²¨
 	  _nop_();
 	  _nop_();
 	  _nop_();
-			 _nop_();
+		_nop_();
 	  OUTPUT = 0;
 	}
 }
@@ -199,7 +198,7 @@ void Trig_SuperSonic(int i)//³ö·¢Éù²¨
 /* º¯ÊýÃèÊö  : ¼ÆËã¾àÀëº¯Êý                                                   */
 /* ÊäÈë²ÎÊý  : ÎÞ                                                             */
 /* ²ÎÊýÃèÊö  : ÎÞ                                                             */
-/* ·µ»ØÖµ    : ÎÞ                                                             */
+/* ·µ»ØÖµ    : 0ÊÇ³¬Ê±Ã»ÊÕµ½£¬1ÊÇÊÕµ½ÁË                                       */
 /******************************************************************************/
 int Measure_Distance(void)
 {
@@ -207,8 +206,8 @@ int Measure_Distance(void)
 	uint h,y;
 	TR0 = 1;
 	while(INPUT==0)
-    {
-        if(count==18)
+		{
+			if(count==18)
 				{		
 					TR0 =0;
 		      TL0 = 0x66;
@@ -234,75 +233,75 @@ int Measure_Distance(void)
 ·µ»ØÖµ£ºresult¡£result=1£¬Ã¦Âµ;result=0£¬²»Ã¦
 ***************************************************/
 bit BusyTest(void)
-  {
-    bit result;
-	  RS=0;       //¸ù¾Ý¹æ¶¨£¬RSÎªµÍµçÆ½£¬RWÎª¸ßµçÆ½Ê±£¬¿ÉÒÔ¶Á×´Ì¬
-    RW=1;
-    E=1;        //E=1£¬²ÅÔÊÐí¶ÁÐ´
-    _nop_();   //¿Õ²Ù×÷
-    _nop_();
-    _nop_(); 
-    _nop_();   //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä	
-    result=BF;  //½«Ã¦Âµ±êÖ¾µçÆ½¸³¸øresult
-   E=0;         //½«E»Ö¸´µÍµçÆ½
-   return result;
-  }
+{
+	bit result;
+	RS=0;       //¸ù¾Ý¹æ¶¨£¬RSÎªµÍµçÆ½£¬RWÎª¸ßµçÆ½Ê±£¬¿ÉÒÔ¶Á×´Ì¬
+  RW=1;
+  E=1;        //E=1£¬²ÅÔÊÐí¶ÁÐ´
+  _nop_();   //¿Õ²Ù×÷
+  _nop_();
+  _nop_(); 
+  _nop_();   //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä	
+  result=BF;  //½«Ã¦Âµ±êÖ¾µçÆ½¸³¸øresult
+  E=0;         //½«E»Ö¸´µÍµçÆ½
+  return result;
+}
 /*****************************************************
 º¯Êý¹¦ÄÜ£º½«Ä£Ê½ÉèÖÃÖ¸Áî»òÏÔÊ¾µØÖ·Ð´ÈëÒº¾§Ä£¿é
 Èë¿Ú²ÎÊý£ºdictate
 ***************************************************/
 void WriteInstruction (unsigned char dictate)
-{   
-    while(BusyTest()==1);   //Èç¹ûÃ¦¾ÍµÈ´ý
-	 RS=0;                  //¸ù¾Ý¹æ¶¨£¬RSºÍR/WÍ¬Ê±ÎªµÍµçÆ½Ê±£¬¿ÉÒÔÐ´ÈëÖ¸Áî
-	 RW=0;   
-	 E=0;                   //EÖÃµÍµçÆ½(¸ù¾Ý±í8-6£¬Ð´Ö¸ÁîÊ±£¬EÎª¸ßÂö³å£¬
+{
+	while(BusyTest()==1);   //Èç¹ûÃ¦¾ÍµÈ´ý
+	RS=0;                  //¸ù¾Ý¹æ¶¨£¬RSºÍR/WÍ¬Ê±ÎªµÍµçÆ½Ê±£¬¿ÉÒÔÐ´ÈëÖ¸Áî
+	RW=0;   
+	E=0;                   //EÖÃµÍµçÆ½(¸ù¾Ý±í8-6£¬Ð´Ö¸ÁîÊ±£¬EÎª¸ßÂö³å£¬
                            // ¾ÍÊÇÈÃE´Ó0µ½1·¢ÉúÕýÌø±ä£¬ËùÒÔÓ¦ÏÈÖÃ"0"
-	 _nop_();
-	 _nop_();               //¿Õ²Ù×÷Á½¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
-	 P0=dictate;            //½«Êý¾ÝËÍÈëP0¿Ú£¬¼´Ð´ÈëÖ¸Áî»òµØÖ·
-	 _nop_();
-	 _nop_();
-	 _nop_();
-	 _nop_();               //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
-	 E=1;                   //EÖÃ¸ßµçÆ½
-	 _nop_();
-	 _nop_();
-	 _nop_();
-	 _nop_();               //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
-	  E=0;                  //µ±EÓÉ¸ßµçÆ½Ìø±ä³ÉµÍµçÆ½Ê±£¬Òº¾§Ä£¿é¿ªÊ¼Ö´ÐÐÃüÁî
+  _nop_();
+	_nop_();               //¿Õ²Ù×÷Á½¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
+	P0=dictate;            //½«Êý¾ÝËÍÈëP0¿Ú£¬¼´Ð´ÈëÖ¸Áî»òµØÖ·
+	_nop_();
+	_nop_();
+	_nop_();
+	_nop_();               //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
+	E=1;                   //EÖÃ¸ßµçÆ½
+	_nop_();
+	_nop_();
+	_nop_();
+	_nop_();               //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
+	E=0;                  //µ±EÓÉ¸ßµçÆ½Ìø±ä³ÉµÍµçÆ½Ê±£¬Òº¾§Ä£¿é¿ªÊ¼Ö´ÐÐÃüÁî
  }
 /*****************************************************
 º¯Êý¹¦ÄÜ£ºÖ¸¶¨×Ö·ûÏÔÊ¾µÄÊµ¼ÊµØÖ·
 Èë¿Ú²ÎÊý£ºx
 ***************************************************/
- void WriteAddress(unsigned char x)
- {
-     WriteInstruction(x|0x80); //ÏÔÊ¾Î»ÖÃµÄÈ·¶¨·½·¨¹æ¶¨Îª"80H+µØÖ·Âëx"
- }
+void WriteAddress(unsigned char x)
+{
+	WriteInstruction(x|0x80); //ÏÔÊ¾Î»ÖÃµÄÈ·¶¨·½·¨¹æ¶¨Îª"80H+µØÖ·Âëx"
+}
 /*****************************************************
 º¯Êý¹¦ÄÜ£º½«Êý¾Ý(×Ö·ûµÄ±ê×¼ASCIIÂë)Ð´ÈëÒº¾§Ä£¿é
 Èë¿Ú²ÎÊý£ºy(Îª×Ö·û³£Á¿)
 ***************************************************/
- void WriteData(unsigned char y)
- {
-    while(BusyTest()==1);  
-	  RS=1;           //RSÎª¸ßµçÆ½£¬RWÎªµÍµçÆ½Ê±£¬¿ÉÒÔÐ´ÈëÊý¾Ý
-	  RW=0;
-	  E=0;            //EÖÃµÍµçÆ½(¸ù¾Ý±í8-6£¬Ð´Ö¸ÁîÊ±£¬EÎª¸ßÂö³å£¬
+void WriteData(unsigned char y)
+{
+	while(BusyTest()==1);  
+	RS=1;           //RSÎª¸ßµçÆ½£¬RWÎªµÍµçÆ½Ê±£¬¿ÉÒÔÐ´ÈëÊý¾Ý
+	RW=0;
+	E=0;            //EÖÃµÍµçÆ½(¸ù¾Ý±í8-6£¬Ð´Ö¸ÁîÊ±£¬EÎª¸ßÂö³å£¬
                      // ¾ÍÊÇÈÃE´Ó0µ½1·¢ÉúÕýÌø±ä£¬ËùÒÔÓ¦ÏÈÖÃ"0"
-	  P0=y;           //½«Êý¾ÝËÍÈëP0¿Ú£¬¼´½«Êý¾ÝÐ´ÈëÒº¾§Ä£¿é
-	  _nop_();
-	  _nop_();
- 	  _nop_();
-     _nop_();       //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
-	  E=1;           //EÖÃ¸ßµçÆ½
-	  _nop_();
-	  _nop_();
-	  _nop_();
-	  _nop_();        //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
-	  E=0;            //µ±EÓÉ¸ßµçÆ½Ìø±ä³ÉµÍµçÆ½Ê±£¬Òº¾§Ä£¿é¿ªÊ¼Ö´ÐÐÃüÁî
- }
+	P0=y;           //½«Êý¾ÝËÍÈëP0¿Ú£¬¼´½«Êý¾ÝÐ´ÈëÒº¾§Ä£¿é
+	_nop_();
+	_nop_();
+ 	_nop_();
+  _nop_();       //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
+	E=1;           //EÖÃ¸ßµçÆ½
+	_nop_();
+	_nop_();
+	_nop_();
+	_nop_();        //¿Õ²Ù×÷ËÄ¸ö»úÆ÷ÖÜÆÚ£¬¸øÓ²¼þ·´Ó¦Ê±¼ä
+	E=0;            //µ±EÓÉ¸ßµçÆ½Ìø±ä³ÉµÍµçÆ½Ê±£¬Òº¾§Ä£¿é¿ªÊ¼Ö´ÐÐÃüÁî
+}
 /*****************************************************
 º¯Êý¹¦ÄÜ£º¶ÔLCDµÄÏÔÊ¾Ä£Ê½½øÐÐ³õÊ¼»¯ÉèÖÃ
 ***************************************************/
@@ -341,7 +340,7 @@ bit Init_DS18B20(void)
  for(time=0;time<200;time++)  //ÂÔÎ¢ÑÓÊ±Ô¼600Î¢Ãë
      ;         //ÒÔÏòDS18B20·¢³öÒ»³ÖÐø480~960usµÄµÍµçÆ½¸´Î»Âö³å 
  DQ = 1;           //ÊÍ·ÅÊý¾ÝÏß£¨½«Êý¾ÝÏßÀ­¸ß£© 
-  for(time=0;time<10;time++)
+ for(time=0;time<10;time++)
      ;  //ÑÓÊ±Ô¼30us£¨ÊÍ·Å×ÜÏßºóÐèµÈ´ý15~60usÈÃDS18B20Êä³ö´æÔÚÂö³å£©
  flag=DQ;          //ÈÃµ¥Æ¬»ú¼ì²âÊÇ·ñÊä³öÁË´æÔÚÂö³å£¨DQ=0±íÊ¾´æÔÚ£©      
  for(time=0;time<200;time++)  //ÑÓÊ±×ã¹»³¤Ê±¼ä£¬µÈ´ý´æÔÚÂö³åÊä³öÍê±Ï
@@ -353,28 +352,27 @@ bit Init_DS18B20(void)
 ³ö¿Ú²ÎÊý£ºdat
 ***************************************************/ 
 unsigned char ReadOneChar(void)
- {
-		unsigned char i=0;	
-		unsigned char dat;  //´¢´æ¶Á³öµÄÒ»¸ö×Ö½ÚÊý¾Ý
-		for (i=0;i<8;i++)
-		 {
-		   
-		   DQ =1;       // ÏÈ½«Êý¾ÝÏßÀ­¸ß
-		   _nop_();	    //µÈ´ýÒ»¸ö»úÆ÷ÖÜÆÚ	 
-		   DQ = 0;      //µ¥Æ¬»ú´ÓDS18B20¶ÁÊé¾ÝÊ±,½«Êý¾ÝÏß´Ó¸ßÀ­µÍ¼´Æô¶¯¶ÁÊ±Ðò
-			dat>>=1;
-		   _nop_();     //µÈ´ýÒ»¸ö»úÆ÷ÖÜÆÚ		   
-		   DQ = 1;     //½«Êý¾ÝÏß"ÈËÎª"À­¸ß,Îªµ¥Æ¬»ú¼ì²âDS18B20µÄÊä³öµçÆ½×÷×¼±¸
-		   for(time=0;time<2;time++)
+{
+	unsigned char i=0;	
+	unsigned char dat;  //´¢´æ¶Á³öµÄÒ»¸ö×Ö½ÚÊý¾Ý
+	for (i=0;i<8;i++)
+	{
+		DQ =1;       // ÏÈ½«Êý¾ÝÏßÀ­¸ß
+		_nop_();	    //µÈ´ýÒ»¸ö»úÆ÷ÖÜÆÚ	 
+		DQ = 0;      //µ¥Æ¬»ú´ÓDS18B20¶ÁÊé¾ÝÊ±,½«Êý¾ÝÏß´Ó¸ßÀ­µÍ¼´Æô¶¯¶ÁÊ±Ðò
+		dat>>=1;
+		_nop_();     //µÈ´ýÒ»¸ö»úÆ÷ÖÜÆÚ		   
+		DQ = 1;     //½«Êý¾ÝÏß"ÈËÎª"À­¸ß,Îªµ¥Æ¬»ú¼ì²âDS18B20µÄÊä³öµçÆ½×÷×¼±¸
+		for(time=0;time<2;time++)
              ;      //ÑÓÊ±Ô¼6us£¬Ê¹Ö÷»úÔÚ15usÄÚ²ÉÑù
-		   if(DQ==1)
-		      dat|=0x80;  //Èç¹û¶Áµ½µÄÊý¾ÝÊÇ1£¬Ôò½«1´æÈëdat
-			else
-				dat|=0x00;//Èç¹û¶Áµ½µÄÊý¾ÝÊÇ0£¬Ôò½«0´æÈëdat
+		if(DQ==1)
+			dat|=0x80;  //Èç¹û¶Áµ½µÄÊý¾ÝÊÇ1£¬Ôò½«1´æÈëdat
+		else
+		  dat|=0x00;//Èç¹û¶Áµ½µÄÊý¾ÝÊÇ0£¬Ôò½«0´æÈëdat
 		     //½«µ¥Æ¬»ú¼ì²âµ½µÄµçÆ½ÐÅºÅDQ´æÈër[i]	
-		   for(time=0;time<8;time++)
+		for(time=0;time<8;time++)
 		      	;              //ÑÓÊ±3us,Á½¸ö¶ÁÊ±ÐòÖ®¼ä±ØÐëÓÐ´óÓÚ1usµÄ»Ö¸´ÆÚ	
-	    }	                    
+	 }	                    
 	 return (dat);    //·µ»Ø¶Á³öµÄÊ®½øÖÆÊý¾Ý
 }
 /*****************************************************
@@ -385,20 +383,20 @@ WriteOneChar(unsigned char dat)
 {
 	unsigned char i=0;
 	for (i=0; i<8; i++)
-		 {
-		  DQ =1;         // ÏÈ½«Êý¾ÝÏßÀ­¸ß
-		  _nop_();	     //µÈ´ýÒ»¸ö»úÆ÷ÖÜÆÚ	 
-		  DQ=0;          //½«Êý¾ÝÏß´Ó¸ßÀ­µÍÊ±¼´Æô¶¯Ð´Ê±Ðò       
-		  DQ=dat&0x01;   //ÀûÓÃÓëÔËËãÈ¡³öÒªÐ´µÄÄ³Î»¶þ½øÖÆÊý¾Ý,
+	{
+		DQ =1;         // ÏÈ½«Êý¾ÝÏßÀ­¸ß
+		_nop_();	     //µÈ´ýÒ»¸ö»úÆ÷ÖÜÆÚ	 
+		DQ=0;          //½«Êý¾ÝÏß´Ó¸ßÀ­µÍÊ±¼´Æô¶¯Ð´Ê±Ðò       
+		DQ=dat&0x01;   //ÀûÓÃÓëÔËËãÈ¡³öÒªÐ´µÄÄ³Î»¶þ½øÖÆÊý¾Ý,
                        //²¢½«ÆäËÍµ½Êý¾ÝÏßÉÏµÈ´ýDS18B20²ÉÑù	
-		 for(time=0;time<10;time++)	
+		for(time=0;time<10;time++)	
 		     ;//ÑÓÊ±Ô¼30us£¬DS18B20ÔÚÀ­µÍºóµÄÔ¼15~60usÆÚ¼ä´ÓÊý¾ÝÏßÉÏ²ÉÑù
-		  DQ=1;          //ÊÍ·ÅÊý¾ÝÏß		    
-		  for(time=0;time<1;time++)
+		DQ=1;          //ÊÍ·ÅÊý¾ÝÏß		    
+		for(time=0;time<1;time++)
 			  ;//ÑÓÊ±3us,Á½¸öÐ´Ê±Ðò¼äÖÁÉÙÐèÒª1usµÄ»Ö¸´ÆÚ
-		  dat>>=1;       //½«datÖÐµÄ¸÷¶þ½øÖÆÎ»Êý¾ÝÓÒÒÆ1Î»
-		 }
-	  for(time=0;time<4;time++)
+		dat>>=1;       //½«datÖÐµÄ¸÷¶þ½øÖÆÎ»Êý¾ÝÓÒÒÆ1Î»
+	}
+	for(time=0;time<4;time++)
 	              ; //ÉÔ×÷ÑÓÊ±,¸øÓ²¼þÒ»µã·´Ó¦Ê±¼ä
 }
 /******************************************************************************
@@ -408,43 +406,43 @@ WriteOneChar(unsigned char dat)
 º¯Êý¹¦ÄÜ£ºÏÔÊ¾Ã»ÓÐ¼ì²âµ½DS18B20
 ***************************************************/   
 void display_error(void)
- {
-       unsigned char i;
-	 	     WriteAddress(0x00);    //Ð´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ1ÐÐµÚ1ÁÐ¿ªÊ¼ÏÔÊ¾
-			   i = 0;                //´ÓµÚÒ»¸ö×Ö·û¿ªÊ¼ÏÔÊ¾
-				while(Error[i] != '\0')  //Ö»ÒªÃ»ÓÐÐ´µ½½áÊø±êÖ¾£¬¾Í¼ÌÐøÐ´
-				{						
-					WriteData(Error[i]);   //½«×Ö·û³£Á¿Ð´ÈëLCD
-					i++;                 //Ö¸ÏòÏÂÒ»¸ö×Ö·û
-					Delay_xMs(100);//ÑÓÊ±100ms½Ï³¤Ê±¼ä£¬ÒÔ¿´Çå¹ØÓÚÏÔÊ¾µÄËµÃ÷
-				}	
-				while(1)              //½øÈëËÀÑ­»·£¬µÈ´ý²éÃ÷Ô­Òò
+{
+	unsigned char i;
+	WriteAddress(0x00);    //Ð´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ1ÐÐµÚ1ÁÐ¿ªÊ¼ÏÔÊ¾
+  i = 0;                //´ÓµÚÒ»¸ö×Ö·û¿ªÊ¼ÏÔÊ¾
+  while(Error[i] != '\0')  //Ö»ÒªÃ»ÓÐÐ´µ½½áÊø±êÖ¾£¬¾Í¼ÌÐøÐ´
+		{
+			WriteData(Error[i]);   //½«×Ö·û³£Á¿Ð´ÈëLCD
+			i++;                 //Ö¸ÏòÏÂÒ»¸ö×Ö·û
+			Delay_xMs(100);//ÑÓÊ±100ms½Ï³¤Ê±¼ä£¬ÒÔ¿´Çå¹ØÓÚÏÔÊ¾µÄËµÃ÷
+		}	
+	while(1)              //½øÈëËÀÑ­»·£¬µÈ´ý²éÃ÷Ô­Òò
 				  ;
 }
 /*****************************************************
 º¯Êý¹¦ÄÜ£ºÏÔÊ¾ÎÂ¶È·ûºÅ
 ***************************************************/   
 void display_symbol(void)
- {
-       unsigned char i;
-	 	     WriteAddress(0x00);    //Ð´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ2ÐÐµÚ1ÁÐ¿ªÊ¼ÏÔÊ¾
-			   i = 0;                //´ÓµÚÒ»¸ö×Ö·û¿ªÊ¼ÏÔÊ¾
-				while(Temp[i] != '\0')  //Ö»ÒªÃ»ÓÐÐ´µ½½áÊø±êÖ¾£¬¾Í¼ÌÐøÐ´
-				{						
-					WriteData(Temp[i]);   //½«×Ö·û³£Á¿Ð´ÈëLCD
-					i++;                 //Ö¸ÏòÏÂÒ»¸ö×Ö·û
-					Delay_xMs(50);        //ÑÓÊ±1ms¸øÓ²¼þÒ»µã·´Ó¦Ê±¼ä
-				}	
+{
+	unsigned char i;
+	WriteAddress(0x00);    //Ð´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ2ÐÐµÚ1ÁÐ¿ªÊ¼ÏÔÊ¾
+	i = 0;                //´ÓµÚÒ»¸ö×Ö·û¿ªÊ¼ÏÔÊ¾
+	while(Temp[i] != '\0')  //Ö»ÒªÃ»ÓÐÐ´µ½½áÊø±êÖ¾£¬¾Í¼ÌÐøÐ´
+		{
+			WriteData(Temp[i]);   //½«×Ö·û³£Á¿Ð´ÈëLCD
+			i++;                 //Ö¸ÏòÏÂÒ»¸ö×Ö·û
+			Delay_xMs(50);        //ÑÓÊ±1ms¸øÓ²¼þÒ»µã·´Ó¦Ê±¼ä
+		}	
 }
 
 /*****************************************************
 º¯Êý¹¦ÄÜ£ºÏÔÊ¾ÎÂ¶ÈµÄÐ¡Êýµã
 ***************************************************/   
 void 	display_dot(void)
-{         
-	 WriteAddress(0x09);	  //Ð´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ2ÐÐµÚ10ÁÐ¿ªÊ¼ÏÔÊ¾		   
-	 WriteData('.');      //½«Ð¡ÊýµãµÄ×Ö·û³£Á¿Ð´ÈëLCD
-	 Delay_xMs(50);         //ÑÓÊ±1ms¸øÓ²¼þÒ»µã·´Ó¦Ê±¼ä		
+{
+	WriteAddress(0x09);	  //Ð´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ2ÐÐµÚ10ÁÐ¿ªÊ¼ÏÔÊ¾		   
+	WriteData('.');      //½«Ð¡ÊýµãµÄ×Ö·û³£Á¿Ð´ÈëLCD
+	Delay_xMs(50);         //ÑÓÊ±1ms¸øÓ²¼þÒ»µã·´Ó¦Ê±¼ä		
 }
 /*****************************************************
 º¯Êý¹¦ÄÜ£ºÏÔÊ¾ÎÂ¶ÈµÄµ¥Î»(Cent)
@@ -455,11 +453,11 @@ void 	display_cent(void)
 	WriteAddress(0x0c);        //Ð´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ2ÐÐµÚ13ÁÐ¿ªÊ¼ÏÔÊ¾	
 	i = 0;                    //´ÓµÚÒ»¸ö×Ö·û¿ªÊ¼ÏÔÊ¾ 
 	while(Cent[i] != '\0')     //Ö»ÒªÃ»ÓÐÐ´µ½½áÊø±êÖ¾£¬¾Í¼ÌÐøÐ´
-	{					
-	 WriteData(Cent[i]);     //½«×Ö·û³£Á¿Ð´ÈëLCD
-	 i++;                 //Ö¸ÏòÏÂÒ»¸ö×Ö·û
-	 Delay_xMs(50);        //ÑÓÊ±1ms¸øÓ²¼þÒ»µã·´Ó¦Ê±¼ä
-	}	
+		{
+			WriteData(Cent[i]);     //½«×Ö·û³£Á¿Ð´ÈëLCD
+	    i++;                 //Ö¸ÏòÏÂÒ»¸ö×Ö·û
+	    Delay_xMs(50);        //ÑÓÊ±1ms¸øÓ²¼þÒ»µã·´Ó¦Ê±¼ä
+	  }	
 }
 /*****************************************************
 º¯Êý¹¦ÄÜ£ºÏÔÊ¾ÎÂ¶ÈµÄÕûÊý²¿·Ö
@@ -467,8 +465,8 @@ void 	display_cent(void)
 ***************************************************/ 
 void display_temp1(unsigned char x)
 {
- unsigned char j,k,l;     //j,k,l·Ö±ð´¢´æÎÂ¶ÈµÄ°ÙÎ»¡¢Ê®Î»ºÍ¸öÎ»
-	j=x/100;              //È¡°ÙÎ»
+	unsigned char j,k,l;     //j,k,l·Ö±ð´¢´æÎÂ¶ÈµÄ°ÙÎ»¡¢Ê®Î»ºÍ¸öÎ»
+  j=x/100;              //È¡°ÙÎ»
 	k=(x%100)/10;    //È¡Ê®Î»
 	l=x%10;             //È¡¸öÎ»  
 	WriteAddress(0x06);    //Ð´ÏÔÊ¾µØÖ·,½«ÔÚµÚ2ÐÐµÚ7ÁÐ¿ªÊ¼ÏÔÊ¾
@@ -492,13 +490,13 @@ void display_temp1(unsigned char x)
 ***************************************************/ 
 void ReadyReadTemp(void)
 {
-    Init_DS18B20();     //½«DS18B20³õÊ¼»¯
-		WriteOneChar(0xCC); // Ìø¹ý¶ÁÐòºÅÁÐºÅµÄ²Ù×÷
-		WriteOneChar(0x44); // Æô¶¯ÎÂ¶È×ª»»	  
-	  for(time=0;time<100;time++);	 //ÎÂ¶È×ª»»ÐèÒªÒ»µãÊ±¼ä
-		Init_DS18B20();     //½«DS18B20³õÊ¼»¯
-		WriteOneChar(0xCC); //Ìø¹ý¶ÁÐòºÅÁÐºÅµÄ²Ù×÷
-		WriteOneChar(0xBE); //¶ÁÈ¡ÎÂ¶È¼Ä´æÆ÷,Ç°Á½¸ö·Ö±ðÊÇÎÂ¶ÈµÄµÍÎ»ºÍ¸ßÎ»	
+	Init_DS18B20();     //½«DS18B20³õÊ¼»¯
+	WriteOneChar(0xCC); // Ìø¹ý¶ÁÐòºÅÁÐºÅµÄ²Ù×÷
+	WriteOneChar(0x44); // Æô¶¯ÎÂ¶È×ª»»	  
+	for(time=0;time<100;time++);	 //ÎÂ¶È×ª»»ÐèÒªÒ»µãÊ±¼ä
+	Init_DS18B20();     //½«DS18B20³õÊ¼»¯
+	WriteOneChar(0xCC); //Ìø¹ý¶ÁÐòºÅÁÐºÅµÄ²Ù×÷
+	WriteOneChar(0xBE); //¶ÁÈ¡ÎÂ¶È¼Ä´æÆ÷,Ç°Á½¸ö·Ö±ðÊÇÎÂ¶ÈµÄµÍÎ»ºÍ¸ßÎ»	
 }
 
 /******************************************************************************/

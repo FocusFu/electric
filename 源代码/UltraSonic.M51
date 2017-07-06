@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        07/02/2017  18:12:14  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/03/2017  19:47:28  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -13,11 +13,11 @@ INPUT MODULES INCLUDED:
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C?IMUL)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C?SIDIV)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C?LMUL)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C?SLDIV)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
-  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C?ULDIV)
 
 
@@ -33,8 +33,8 @@ LINK MAP OF MODULE:  UltraSonic (ULTRASONIC)
                     0010H     0010H                  *** GAP ***
             BIT     0020H.0   0000H.1   UNIT         _BIT_GROUP_
                     0020H.1   0000H.7                *** GAP ***
-            DATA    0021H     0056H     UNIT         ?DT?ULTRASONIC
-            IDATA   0077H     0001H     UNIT         ?STACK
+            DATA    0021H     005AH     UNIT         ?DT?ULTRASONIC
+            IDATA   007BH     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
@@ -42,42 +42,42 @@ LINK MAP OF MODULE:  UltraSonic (ULTRASONIC)
                     000AH     0001H                  *** GAP ***
             CODE    000BH     0003H     ABSOLUTE     
             CODE    000EH     01D3H     UNIT         ?C?LIB_CODE
-            CODE    01E1H     00B9H     UNIT         ?PR?MAIN?ULTRASONIC
-            CODE    029AH     008CH     UNIT         ?C_C51STARTUP
-            CODE    0326H     0074H     UNIT         ?PR?_DISPLAY?ULTRASONIC
-            CODE    039AH     006AH     UNIT         ?PR?MEASURE_DISTANCE?ULTRASONIC
-            CODE    0404H     0061H     UNIT         ?C_INITSEG
-            CODE    0465H     0044H     UNIT         ?C?LDIV
-            CODE    04A9H     0035H     UNIT         ?PR?INIT_DS18B20?ULTRASONIC
-            CODE    04DEH     0034H     UNIT         ?PR?INITLCD?ULTRASONIC
-            CODE    0512H     0034H     UNIT         ?PR?_WRITEONECHAR?ULTRASONIC
-            CODE    0546H     0034H     UNIT         ?PR?_DISPLAY_TEMP1?ULTRASONIC
-            CODE    057AH     0032H     UNIT         ?CO?ULTRASONIC
-            CODE    05ACH     002FH     UNIT         ?PR?_TRIG_SUPERSONIC?ULTRASONIC
-            CODE    05DBH     002FH     UNIT         ?PR?READONECHAR?ULTRASONIC
-            CODE    060AH     002EH     UNIT         ?PR?LCDINITIATE?ULTRASONIC
-            CODE    0638H     002DH     UNIT         ?PR?_DELAY?ULTRASONIC
-            CODE    0665H     0025H     UNIT         ?PR?_DELAY_XMS?ULTRASONIC
-            CODE    068AH     0024H     UNIT         ?PR?READYREADTEMP?ULTRASONIC
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 2
+            CODE    01E1H     00DDH     UNIT         ?PR?MAIN?ULTRASONIC
+            CODE    02BEH     008CH     UNIT         ?C_C51STARTUP
+            CODE    034AH     0083H     UNIT         ?PR?MEASURE_DISTANCE?ULTRASONIC
+            CODE    03CDH     0074H     UNIT         ?PR?_DISPLAY?ULTRASONIC
+            CODE    0441H     0061H     UNIT         ?C_INITSEG
+            CODE    04A2H     0044H     UNIT         ?C?LDIV
+            CODE    04E6H     0035H     UNIT         ?PR?INIT_DS18B20?ULTRASONIC
+            CODE    051BH     0034H     UNIT         ?PR?INITLCD?ULTRASONIC
+            CODE    054FH     0034H     UNIT         ?PR?_WRITEONECHAR?ULTRASONIC
+            CODE    0583H     0034H     UNIT         ?PR?_DISPLAY_TEMP1?ULTRASONIC
+            CODE    05B7H     0032H     UNIT         ?CO?ULTRASONIC
+            CODE    05E9H     002FH     UNIT         ?PR?_TRIG_SUPERSONIC?ULTRASONIC
+            CODE    0618H     002FH     UNIT         ?PR?READONECHAR?ULTRASONIC
+            CODE    0647H     002EH     UNIT         ?PR?LCDINITIATE?ULTRASONIC
+            CODE    0675H     002DH     UNIT         ?PR?_DELAY?ULTRASONIC
+            CODE    06A2H     002CH     UNIT         ?PR?_DELAY_XMS?ULTRASONIC
+            CODE    06CEH     0024H     UNIT         ?PR?READYREADTEMP?ULTRASONIC
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 2
 
 
-            CODE    06AEH     0023H     UNIT         ?PR?_WRITEINSTRUCTION?ULTRASONIC
-            CODE    06D1H     0023H     UNIT         ?PR?TIMER0?ULTRASONIC
-            CODE    06F4H     0022H     UNIT         ?PR?_DISPLAY_CHAR?ULTRASONIC
-            CODE    0716H     0020H     UNIT         ?PR?_WRITEDATA?ULTRASONIC
-            CODE    0736H     001EH     UNIT         ?PR?DISPLAY_ERROR?ULTRASONIC
-            CODE    0754H     001CH     UNIT         ?PR?_ALARM?ULTRASONIC
-            CODE    0770H     001BH     UNIT         ?PR?_DELAYT?ULTRASONIC
-            CODE    078BH     0018H     UNIT         ?PR?DISPLAY_SYMBOL?ULTRASONIC
-            CODE    07A3H     0018H     UNIT         ?PR?DISPLAY_CENT?ULTRASONIC
-            CODE    07BBH     0013H     UNIT         ?PR?BUSYTEST?ULTRASONIC
-            CODE    07CEH     0011H     UNIT         ?PR?DISPLAY_DOT?ULTRASONIC
-            CODE    07DFH     0011H     UNIT         ?PR?_DISPLAY_TEMP2?ULTRASONIC
-            CODE    07F0H     0010H     UNIT         ?PR?INIT_PARAMETER?ULTRASONIC
-            CODE    0800H     000EH     UNIT         ?PR?INIT_MCU?ULTRASONIC
-            CODE    080EH     000DH     UNIT         ?PR?_WRITE_DATE?ULTRASONIC
-            CODE    081BH     000AH     UNIT         ?PR?_WRITE_COM?ULTRASONIC
+            CODE    06F2H     0023H     UNIT         ?PR?_WRITEINSTRUCTION?ULTRASONIC
+            CODE    0715H     0023H     UNIT         ?PR?TIMER0?ULTRASONIC
+            CODE    0738H     0022H     UNIT         ?PR?_DISPLAY_CHAR?ULTRASONIC
+            CODE    075AH     0020H     UNIT         ?PR?_WRITEDATA?ULTRASONIC
+            CODE    077AH     001EH     UNIT         ?PR?DISPLAY_ERROR?ULTRASONIC
+            CODE    0798H     001DH     UNIT         ?PR?DISPLAY_SYMBOL?ULTRASONIC
+            CODE    07B5H     001DH     UNIT         ?PR?DISPLAY_CENT?ULTRASONIC
+            CODE    07D2H     001BH     UNIT         ?PR?_ALARM?ULTRASONIC
+            CODE    07EDH     001BH     UNIT         ?PR?_DELAYT?ULTRASONIC
+            CODE    0808H     0013H     UNIT         ?PR?BUSYTEST?ULTRASONIC
+            CODE    081BH     0011H     UNIT         ?PR?DISPLAY_DOT?ULTRASONIC
+            CODE    082CH     0011H     UNIT         ?PR?_DISPLAY_TEMP2?ULTRASONIC
+            CODE    083DH     0010H     UNIT         ?PR?INIT_PARAMETER?ULTRASONIC
+            CODE    084DH     000EH     UNIT         ?PR?INIT_MCU?ULTRASONIC
+            CODE    085BH     000DH     UNIT         ?PR?_WRITE_DATE?ULTRASONIC
+            CODE    0868H     000AH     UNIT         ?PR?_WRITE_COM?ULTRASONIC
 
 
 
@@ -104,9 +104,9 @@ SEGMENT                                     BIT_GROUP          DATA_GROUP
   +--> ?PR?DISPLAY_DOT?ULTRASONIC
   +--> ?PR?DISPLAY_CENT?ULTRASONIC
   +--> ?PR?_TRIG_SUPERSONIC?ULTRASONIC
-  +--> ?PR?MEASURE_DISTANCE?ULTRASONIC
   +--> ?PR?READYREADTEMP?ULTRASONIC
   +--> ?PR?READONECHAR?ULTRASONIC
+  +--> ?PR?MEASURE_DISTANCE?ULTRASONIC
   +--> ?PR?_DISPLAY_TEMP1?ULTRASONIC
   +--> ?PR?_DISPLAY_TEMP2?ULTRASONIC
   +--> ?PR?_DISPLAY?ULTRASONIC
@@ -119,10 +119,10 @@ SEGMENT                                     BIT_GROUP          DATA_GROUP
 ?PR?_WRITE_COM?ULTRASONIC                -----    -----      -----    -----
   +--> ?PR?_DELAY?ULTRASONIC
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 3
 
 
-?PR?_ALARM?ULTRASONIC                    -----    -----      000CH    0001H
+?PR?_ALARM?ULTRASONIC                    -----    -----      000CH    0002H
   +--> ?PR?_DELAY_XMS?ULTRASONIC
 
 ?PR?_DISPLAY_CHAR?ULTRASONIC             -----    -----      000CH    0001H
@@ -170,16 +170,16 @@ SEGMENT                                     BIT_GROUP          DATA_GROUP
   +--> ?PR?_WRITEDATA?ULTRASONIC
   +--> ?PR?_DELAY_XMS?ULTRASONIC
 
-?PR?MEASURE_DISTANCE?ULTRASONIC          -----    -----      -----    -----
-  +--> ?PR?_DELAYT?ULTRASONIC
-
 ?PR?READYREADTEMP?ULTRASONIC             -----    -----      -----    -----
   +--> ?PR?INIT_DS18B20?ULTRASONIC
   +--> ?PR?_WRITEONECHAR?ULTRASONIC
 
+?PR?MEASURE_DISTANCE?ULTRASONIC          -----    -----      -----    -----
+  +--> ?PR?_DELAYT?ULTRASONIC
+
 ?PR?_DISPLAY_TEMP1?ULTRASONIC            -----    -----      -----    -----
   +--> ?PR?_WRITEADDRESS?ULTRASONIC
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 4
 
 
   +--> ?PR?_WRITEDATA?ULTRASONIC
@@ -208,74 +208,75 @@ SYMBOL TABLE OF MODULE:  UltraSonic (ULTRASONIC)
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   B:00A8H.7       PUBLIC        EA
-  C:0770H         PUBLIC        _delayt
-  C:07A3H         PUBLIC        display_cent
+  C:07EDH         PUBLIC        _delayt
+  C:07B5H         PUBLIC        display_cent
   B:0080H.7       PUBLIC        BF
-  C:0736H         PUBLIC        display_error
+  C:077AH         PUBLIC        display_error
   B:00A0H.5       PUBLIC        lcden
-  C:071CH         PUBLIC        _WriteData
-  C:05ACH         PUBLIC        _Trig_SuperSonic
+  C:0760H         PUBLIC        _WriteData
+  C:05E9H         PUBLIC        _Trig_SuperSonic
   D:0021H         PUBLIC        table
-  C:04DEH         PUBLIC        initLCD
-  C:066AH         PUBLIC        _Delay_xMs
-  C:05A7H         PUBLIC        Cent
-  C:0594H         PUBLIC        Error
+  C:051BH         PUBLIC        initLCD
+  C:06AEH         PUBLIC        _Delay_xMs
+  C:05E4H         PUBLIC        Cent
+  C:05D1H         PUBLIC        Error
   D:00A8H         PUBLIC        IE
-  C:068AH         PUBLIC        ReadyReadTemp
+  C:06CEH         PUBLIC        ReadyReadTemp
   B:00B0H.2       PUBLIC        INPUT
-  C:0647H         PUBLIC        _delay
-  C:057AH         PUBLIC        digit
+  C:0684H         PUBLIC        _delay
+  C:05B7H         PUBLIC        digit
   B:00A0H.2       PUBLIC        DQ
-  C:05A1H         PUBLIC        Temp
+  C:05DEH         PUBLIC        Temp
   D:00B8H         PUBLIC        IP
-  C:04A9H         PUBLIC        Init_DS18B20
-  C:07F0H         PUBLIC        Init_Parameter
-  C:05DBH         PUBLIC        ReadOneChar
-  C:07CEH         PUBLIC        display_dot
+  C:04E6H         PUBLIC        Init_DS18B20
+  C:083DH         PUBLIC        Init_Parameter
+  C:0618H         PUBLIC        ReadOneChar
+  C:081BH         PUBLIC        display_dot
   B:0090H.0       PUBLIC        RS
   C:01E1H         PUBLIC        main
   B:00A0H.6       PUBLIC        dula
   B:0090H.1       PUBLIC        RW
   B:00A0H.7       PUBLIC        wela
   D:0031H         PUBLIC        count
-  C:0811H         PUBLIC        _write_date
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 5
+  C:085EH         PUBLIC        _write_date
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 5
 
 
   D:0032H         PUBLIC        time
-  C:0512H         PUBLIC        _WriteOneChar
+  C:054FH         PUBLIC        _WriteOneChar
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
-  C:06B5H         PUBLIC        _WriteInstruction
-  C:0584H         PUBLIC        Str
+  C:06F9H         PUBLIC        _WriteInstruction
+  C:05C1H         PUBLIC        Str
   D:0033H         PUBLIC        table0
   D:0046H         PUBLIC        table1
   D:0057H         PUBLIC        table2
   D:0069H         PUBLIC        table3
   B:00A0H.5       PUBLIC        E
-  C:0546H         PUBLIC        _display_temp1
-  C:07DFH         PUBLIC        _display_temp2
-  C:07BBH         PUBLIC        BusyTest
+  C:0583H         PUBLIC        _display_temp1
+  C:082CH         PUBLIC        _display_temp2
+  C:0808H         PUBLIC        BusyTest
   B:00A8H.1       PUBLIC        ET0
   B:0088H.5       PUBLIC        TF0
   D:008CH         PUBLIC        TH0
-  C:081BH         PUBLIC        _write_com
+  C:0868H         PUBLIC        _write_com
   D:0073H         PUBLIC        distance
   D:008AH         PUBLIC        TL0
-  C:060AH         PUBLIC        LcdInitiate
-  C:06D1H         PUBLIC        timer0
+  C:0647H         PUBLIC        LcdInitiate
+  C:0715H         PUBLIC        timer0
   B:0088H.4       PUBLIC        TR0
   C:0003H         PUBLIC        _WriteAddress
-  C:0800H         PUBLIC        Init_MCU
-  C:039AH         PUBLIC        Measure_Distance
+  C:084DH         PUBLIC        Init_MCU
+  C:034AH         PUBLIC        Measure_Distance
   D:00C8H         PUBLIC        T2CON
-  C:0754H         PUBLIC        _Alarm
+  C:07D2H         PUBLIC        _Alarm
+  D:0077H         PUBLIC        VELOCITY
   B:0090H.5       PUBLIC        OUTPUT
-  C:078BH         PUBLIC        display_symbol
-  C:0326H         PUBLIC        _display
+  C:0798H         PUBLIC        display_symbol
+  C:03CDH         PUBLIC        _display
   D:00D0H         PUBLIC        PSW
-  C:06F4H         PUBLIC        _display_char
+  C:0738H         PUBLIC        _display_char
   B:00A0H.3       PUBLIC        Beep
   -------         PROC          L?0121
   -------         ENDPROC       L?0121
@@ -285,131 +286,131 @@ SYMBOL TABLE OF MODULE:  UltraSonic (ULTRASONIC)
   D:0006H         SYMBOL        a
   D:0004H         SYMBOL        b
   -------         ENDDO         
-  C:0647H         LINE#         17
-  C:0647H         LINE#         18
-  C:0647H         LINE#         20
-  C:0650H         LINE#         21
-  C:0650H         LINE#         22
-  C:0654H         LINE#         23
-  C:0654H         LINE#         25
-  C:065DH         LINE#         26
-  C:0664H         LINE#         27
+  C:0684H         LINE#         17
+  C:0684H         LINE#         18
+  C:0684H         LINE#         20
+  C:068DH         LINE#         21
+  C:068DH         LINE#         22
+  C:0691H         LINE#         23
+  C:0691H         LINE#         25
+  C:069AH         LINE#         26
+  C:06A1H         LINE#         27
   -------         ENDPROC       _DELAY
   -------         PROC          _WRITE_COM
   D:0007H         SYMBOL        com
-  C:081BH         LINE#         35
-  C:081BH         LINE#         36
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 6
+  C:0868H         LINE#         35
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 6
 
 
-  C:081BH         LINE#         37
-  C:081DH         LINE#         38
-  C:081FH         LINE#         39
-  C:081FH         LINE#         40
-  C:081FH         LINE#         41
-  C:081FH         LINE#         42
-  C:0822H         LINE#         43
-  C:0824H         LINE#         44
+  C:0868H         LINE#         36
+  C:0868H         LINE#         37
+  C:086AH         LINE#         38
+  C:086CH         LINE#         39
+  C:086CH         LINE#         40
+  C:086CH         LINE#         41
+  C:086CH         LINE#         42
+  C:086FH         LINE#         43
+  C:0871H         LINE#         44
   -------         ENDPROC       _WRITE_COM
-  -------         PROC          L?0124
-  -------         ENDPROC       L?0124
-  -------         PROC          _WRITE_DATE
-  D:0007H         SYMBOL        date
-  C:0811H         LINE#         52
-  C:0811H         LINE#         53
-  C:0811H         LINE#         54
-  C:0813H         LINE#         55
-  C:0815H         LINE#         56
-  C:0815H         LINE#         57
-  C:0815H         LINE#         58
-  C:0815H         LINE#         59
-  C:0818H         LINE#         60
-  C:081AH         LINE#         61
-  -------         ENDPROC       _WRITE_DATE
-  -------         PROC          INITLCD
-  C:04DEH         LINE#         69
-  C:04DEH         LINE#         70
-  C:04DEH         LINE#         71
-  C:04E0H         LINE#         72
-  C:04E2H         LINE#         73
-  C:04E7H         LINE#         74
-  C:04EEH         LINE#         75
-  C:04F3H         LINE#         76
-  C:04FAH         LINE#         77
-  C:04FFH         LINE#         78
-  C:0506H         LINE#         79
-  C:050BH         LINE#         80
-  -------         ENDPROC       INITLCD
   -------         PROC          L?0125
   -------         ENDPROC       L?0125
+  -------         PROC          _WRITE_DATE
+  D:0007H         SYMBOL        date
+  C:085EH         LINE#         52
+  C:085EH         LINE#         53
+  C:085EH         LINE#         54
+  C:0860H         LINE#         55
+  C:0862H         LINE#         56
+  C:0862H         LINE#         57
+  C:0862H         LINE#         58
+  C:0862H         LINE#         59
+  C:0865H         LINE#         60
+  C:0867H         LINE#         61
+  -------         ENDPROC       _WRITE_DATE
+  -------         PROC          INITLCD
+  C:051BH         LINE#         69
+  C:051BH         LINE#         70
+  C:051BH         LINE#         71
+  C:051DH         LINE#         72
+  C:051FH         LINE#         73
+  C:0524H         LINE#         74
+  C:052BH         LINE#         75
+  C:0530H         LINE#         76
+  C:0537H         LINE#         77
+  C:053CH         LINE#         78
+  C:0543H         LINE#         79
+  C:0548H         LINE#         80
+  -------         ENDPROC       INITLCD
+  -------         PROC          L?0122
+  -------         ENDPROC       L?0122
   -------         PROC          _DELAY_XMS
   D:0006H         SYMBOL        x
   -------         DO            
   D:0004H         SYMBOL        i
   D:0002H         SYMBOL        j
   -------         ENDDO         
-  C:066AH         LINE#         44
-  C:066AH         LINE#         45
-  C:066AH         LINE#         47
-  C:0674H         LINE#         48
-  C:0674H         LINE#         49
-  C:0677H         LINE#         50
-  C:0677H         LINE#         52
-  C:0682H         LINE#         53
-  C:0689H         LINE#         54
+  C:06AEH         LINE#         45
+  C:06AEH         LINE#         46
+  C:06AEH         LINE#         48
+  C:06B8H         LINE#         49
+  C:06B8H         LINE#         50
+  C:06BBH         LINE#         51
+  C:06BBH         LINE#         53
+  C:06C6H         LINE#         54
+  C:06CDH         LINE#         55
   -------         ENDPROC       _DELAY_XMS
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 7
+
+
   -------         PROC          _ALARM
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 7
-
-
   D:000CH         SYMBOL        t
   -------         DO            
-  D:0001H         SYMBOL        i
+  D:000DH         SYMBOL        i
   -------         ENDDO         
-  C:0754H         LINE#         62
-  C:0756H         LINE#         63
-  C:0756H         LINE#         65
-  C:075EH         LINE#         66
-  C:075EH         LINE#         67
-  C:0760H         LINE#         68
-  C:0767H         LINE#         69
-  C:0769H         LINE#         70
-  C:076CH         LINE#         71
-  C:076FH         LINE#         72
+  C:07D2H         LINE#         63
+  C:07D4H         LINE#         64
+  C:07D4H         LINE#         66
+  C:07DEH         LINE#         67
+  C:07DEH         LINE#         68
+  C:07E0H         LINE#         69
+  C:07E3H         LINE#         70
+  C:07E5H         LINE#         71
+  C:07E8H         LINE#         72
+  C:07ECH         LINE#         73
   -------         ENDPROC       _ALARM
   -------         PROC          _DELAYT
   D:0006H         SYMBOL        x
   -------         DO            
   D:0005H         SYMBOL        j
   -------         ENDDO         
-  C:0770H         LINE#         80
-  C:0770H         LINE#         81
-  C:0770H         LINE#         83
-  C:077FH         LINE#         84
-  C:077FH         LINE#         85
-  C:0787H         LINE#         86
-  C:0787H         LINE#         88
-  C:078AH         LINE#         89
-  C:078AH         LINE#         90
+  C:07EDH         LINE#         81
+  C:07EDH         LINE#         82
+  C:07EDH         LINE#         84
+  C:07FCH         LINE#         85
+  C:07FCH         LINE#         86
+  C:0804H         LINE#         87
+  C:0804H         LINE#         89
+  C:0807H         LINE#         90
+  C:0807H         LINE#         91
   -------         ENDPROC       _DELAYT
   -------         PROC          INIT_MCU
-  C:0800H         LINE#         98
-  C:0800H         LINE#         99
-  C:0800H         LINE#         100
-  C:0803H         LINE#         101
-  C:0806H         LINE#         102
-  C:0809H         LINE#         103
-  C:080BH         LINE#         104
-  C:080DH         LINE#         105
+  C:084DH         LINE#         99
+  C:084DH         LINE#         100
+  C:084DH         LINE#         101
+  C:0850H         LINE#         102
+  C:0853H         LINE#         103
+  C:0856H         LINE#         104
+  C:0858H         LINE#         105
+  C:085AH         LINE#         106
   -------         ENDPROC       INIT_MCU
   -------         PROC          INIT_PARAMETER
-  C:07F0H         LINE#         113
-  C:07F0H         LINE#         114
-  C:07F0H         LINE#         115
-  C:07F2H         LINE#         116
-  C:07F4H         LINE#         117
-  C:07F7H         LINE#         118
-  C:07FFH         LINE#         119
+  C:083DH         LINE#         114
+  C:083DH         LINE#         115
+  C:083DH         LINE#         116
+  C:083FH         LINE#         117
+  C:0841H         LINE#         118
+  C:0844H         LINE#         119
+  C:084CH         LINE#         120
   -------         ENDPROC       INIT_PARAMETER
   -------         PROC          _DISPLAY_CHAR
   D:0001H         SYMBOL        point
@@ -417,18 +418,18 @@ SYMBOL TABLE OF MODULE:  UltraSonic (ULTRASONIC)
   -------         DO            
   D:000CH         SYMBOL        i
   -------         ENDDO         
-  C:06F4H         LINE#         127
-  C:06F4H         LINE#         128
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 8
+  C:0738H         LINE#         128
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 8
 
 
-  C:06F4H         LINE#         130
-  C:06FBH         LINE#         131
-  C:06FEH         LINE#         132
-  C:06FEH         LINE#         133
-  C:0705H         LINE#         134
-  C:070CH         LINE#         135
-  C:0715H         LINE#         136
+  C:0738H         LINE#         129
+  C:0738H         LINE#         131
+  C:073FH         LINE#         132
+  C:0742H         LINE#         133
+  C:0742H         LINE#         134
+  C:0749H         LINE#         135
+  C:0750H         LINE#         136
+  C:0759H         LINE#         137
   -------         ENDPROC       _DISPLAY_CHAR
   -------         PROC          _DISPLAY
   D:0002H         SYMBOL        number
@@ -439,56 +440,56 @@ SYMBOL TABLE OF MODULE:  UltraSonic (ULTRASONIC)
   D:000FH         SYMBOL        d
   D:0003H         SYMBOL        e
   -------         ENDDO         
-  C:0326H         LINE#         144
-  C:032CH         LINE#         145
-  C:032CH         LINE#         147
-  C:0335H         LINE#         148
-  C:0349H         LINE#         149
-  C:035DH         LINE#         150
-  C:036AH         LINE#         152
-  C:0372H         LINE#         153
-  C:0377H         LINE#         154
-  C:037CH         LINE#         155
-  C:0384H         LINE#         156
-  C:0389H         LINE#         157
-  C:0390H         LINE#         158
-  C:0395H         LINE#         159
+  C:03CDH         LINE#         145
+  C:03D3H         LINE#         146
+  C:03D3H         LINE#         148
+  C:03DCH         LINE#         149
+  C:03F0H         LINE#         150
+  C:0404H         LINE#         151
+  C:0411H         LINE#         152
+  C:0419H         LINE#         153
+  C:041EH         LINE#         154
+  C:0423H         LINE#         155
+  C:042BH         LINE#         156
+  C:0430H         LINE#         157
+  C:0437H         LINE#         158
+  C:043CH         LINE#         159
   -------         ENDPROC       _DISPLAY
   -------         PROC          _TRIG_SUPERSONIC
   D:0006H         SYMBOL        i
   -------         DO            
   D:0004H         SYMBOL        j
   -------         ENDDO         
-  C:05ACH         LINE#         168
-  C:05ACH         LINE#         169
-  C:05ACH         LINE#         171
-  C:05BCH         LINE#         172
-  C:05BCH         LINE#         173
-  C:05BDH         LINE#         174
-  C:05BEH         LINE#         175
-  C:05BFH         LINE#         176
-  C:05C0H         LINE#         177
-  C:05C1H         LINE#         178
-  C:05C2H         LINE#         179
-  C:05C3H         LINE#         180
-  C:05C4H         LINE#         181
-  C:05C5H         LINE#         182
-  C:05C6H         LINE#         183
-  C:05C8H         LINE#         184
-  C:05C9H         LINE#         185
-  C:05CAH         LINE#         186
-  C:05CBH         LINE#         187
-  C:05CCH         LINE#         188
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 9
+  C:05E9H         LINE#         168
+  C:05E9H         LINE#         169
+  C:05E9H         LINE#         171
+  C:05F9H         LINE#         172
+  C:05F9H         LINE#         173
+  C:05FAH         LINE#         174
+  C:05FBH         LINE#         175
+  C:05FCH         LINE#         176
+  C:05FDH         LINE#         177
+  C:05FEH         LINE#         178
+  C:05FFH         LINE#         179
+  C:0600H         LINE#         180
+  C:0601H         LINE#         181
+  C:0602H         LINE#         182
+  C:0603H         LINE#         183
+  C:0605H         LINE#         184
+  C:0606H         LINE#         185
+  C:0607H         LINE#         186
+  C:0608H         LINE#         187
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 9
 
 
-  C:05CDH         LINE#         189
-  C:05CEH         LINE#         190
-  C:05CFH         LINE#         191
-  C:05D0H         LINE#         192
-  C:05D1H         LINE#         193
-  C:05D3H         LINE#         194
-  C:05DAH         LINE#         195
+  C:0609H         LINE#         188
+  C:060AH         LINE#         189
+  C:060BH         LINE#         190
+  C:060CH         LINE#         191
+  C:060DH         LINE#         192
+  C:060EH         LINE#         193
+  C:0610H         LINE#         194
+  C:0617H         LINE#         195
   -------         ENDPROC       _TRIG_SUPERSONIC
   -------         PROC          MEASURE_DISTANCE
   -------         DO            
@@ -496,245 +497,254 @@ SYMBOL TABLE OF MODULE:  UltraSonic (ULTRASONIC)
   D:0006H         SYMBOL        h
   D:0002H         SYMBOL        y
   -------         ENDDO         
-  C:039AH         LINE#         203
-  C:039AH         LINE#         204
-  C:039AH         LINE#         207
-  C:039CH         LINE#         208
-  C:039FH         LINE#         209
-  C:039FH         LINE#         211
-  C:039FH         LINE#         212
-  C:03A1H         LINE#         213
-  C:03A3H         LINE#         214
-  C:03A5H         LINE#         215
-  C:03B1H         LINE#         216
-  C:03B9H         LINE#         217
-  C:03D3H         LINE#         218
-  C:03D6H         LINE#         219
-  C:03D9H         LINE#         220
-  C:03DFH         LINE#         221
-  C:0403H         LINE#         222
+  C:034AH         LINE#         203
+  C:034AH         LINE#         204
+  C:034AH         LINE#         207
+  C:034CH         LINE#         208
+  C:034FH         LINE#         209
+  C:034FH         LINE#         210
+  C:0354H         LINE#         211
+  C:0354H         LINE#         212
+  C:0356H         LINE#         213
+  C:0359H         LINE#         214
+  C:035CH         LINE#         215
+  C:035FH         LINE#         216
+  C:035FH         LINE#         217
+  C:0363H         LINE#         218
+  C:0363H         LINE#         219
+  C:0365H         LINE#         220
+  C:0367H         LINE#         221
+  C:0369H         LINE#         222
+  C:0375H         LINE#         223
+  C:037DH         LINE#         224
+  C:0397H         LINE#         225
+  C:039AH         LINE#         226
+  C:039DH         LINE#         227
+  C:03A3H         LINE#         228
+  C:03C8H         LINE#         229
+  C:03CCH         LINE#         230
   -------         ENDPROC       MEASURE_DISTANCE
   -------         PROC          BUSYTEST
   -------         DO            
   B:0020H.0       SYMBOL        result
   -------         ENDDO         
-  C:07BBH         LINE#         227
-  C:07BBH         LINE#         228
-  C:07BBH         LINE#         230
-  C:07BDH         LINE#         231
-  C:07BFH         LINE#         232
-  C:07C1H         LINE#         233
-  C:07C2H         LINE#         234
-  C:07C3H         LINE#         235
-  C:07C4H         LINE#         236
-  C:07C5H         LINE#         237
-  C:07C9H         LINE#         238
-  C:07CBH         LINE#         239
-  C:07CDH         LINE#         240
+  C:0808H         LINE#         235
+  C:0808H         LINE#         236
+  C:0808H         LINE#         238
+  C:080AH         LINE#         239
+  C:080CH         LINE#         240
+  C:080EH         LINE#         241
+  C:080FH         LINE#         242
+  C:0810H         LINE#         243
+  C:0811H         LINE#         244
+  C:0812H         LINE#         245
+  C:0816H         LINE#         246
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 10
+
+
+  C:0818H         LINE#         247
+  C:081AH         LINE#         248
   -------         ENDPROC       BUSYTEST
-  C:06B0H         SYMBOL        L?0123
-  -------         PROC          L?0122
-  -------         ENDPROC       L?0122
-  C:06B0H         SYMBOL        L?0123
+  C:06F4H         SYMBOL        L?0124
+  -------         PROC          L?0123
+  -------         ENDPROC       L?0123
+  C:06F4H         SYMBOL        L?0124
   -------         PROC          _WRITEINSTRUCTION
   D:0007H         SYMBOL        dictate
-  C:06B5H         LINE#         245
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 10
-
-
-  C:06B5H         LINE#         246
-  C:06B5H         LINE#         247
-  C:06BAH         LINE#         248
-  C:06BCH         LINE#         249
-  C:06BEH         LINE#         250
-  C:06C0H         LINE#         252
-  C:06C1H         LINE#         253
-  C:06C2H         LINE#         254
-  C:06C4H         LINE#         255
-  C:06C5H         LINE#         256
-  C:06C6H         LINE#         257
-  C:06C7H         LINE#         258
-  C:06C8H         LINE#         259
-  C:06CAH         LINE#         260
-  C:06CBH         LINE#         261
-  C:06CCH         LINE#         262
-  C:06CDH         LINE#         263
-  C:06CEH         LINE#         264
-  C:06D0H         LINE#         265
+  C:06F9H         LINE#         253
+  C:06F9H         LINE#         254
+  C:06F9H         LINE#         255
+  C:06FEH         LINE#         256
+  C:0700H         LINE#         257
+  C:0702H         LINE#         258
+  C:0704H         LINE#         260
+  C:0705H         LINE#         261
+  C:0706H         LINE#         262
+  C:0708H         LINE#         263
+  C:0709H         LINE#         264
+  C:070AH         LINE#         265
+  C:070BH         LINE#         266
+  C:070CH         LINE#         267
+  C:070EH         LINE#         268
+  C:070FH         LINE#         269
+  C:0710H         LINE#         270
+  C:0711H         LINE#         271
+  C:0712H         LINE#         272
+  C:0714H         LINE#         273
   -------         ENDPROC       _WRITEINSTRUCTION
   -------         PROC          _WRITEADDRESS
   D:0007H         SYMBOL        x
-  C:0003H         LINE#         270
-  C:0003H         LINE#         271
-  C:0003H         LINE#         272
+  C:0003H         LINE#         278
+  C:0003H         LINE#         279
+  C:0003H         LINE#         280
   -------         ENDPROC       _WRITEADDRESS
   -------         PROC          L?0126
   -------         ENDPROC       L?0126
   -------         PROC          _WRITEDATA
   D:0007H         SYMBOL        y
-  C:071CH         LINE#         278
-  C:071CH         LINE#         279
-  C:071CH         LINE#         280
-  C:0721H         LINE#         281
-  C:0723H         LINE#         282
-  C:0725H         LINE#         283
-  C:0727H         LINE#         285
-  C:0729H         LINE#         286
-  C:072AH         LINE#         287
-  C:072BH         LINE#         288
-  C:072CH         LINE#         289
-  C:072DH         LINE#         290
-  C:072FH         LINE#         291
-  C:0730H         LINE#         292
-  C:0731H         LINE#         293
-  C:0732H         LINE#         294
-  C:0733H         LINE#         295
-  C:0735H         LINE#         296
+  C:0760H         LINE#         286
+  C:0760H         LINE#         287
+  C:0760H         LINE#         288
+  C:0765H         LINE#         289
+  C:0767H         LINE#         290
+  C:0769H         LINE#         291
+  C:076BH         LINE#         293
+  C:076DH         LINE#         294
+  C:076EH         LINE#         295
+  C:076FH         LINE#         296
+  C:0770H         LINE#         297
+  C:0771H         LINE#         298
+  C:0773H         LINE#         299
+  C:0774H         LINE#         300
+  C:0775H         LINE#         301
+  C:0776H         LINE#         302
+  C:0777H         LINE#         303
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 11
+
+
+  C:0779H         LINE#         304
   -------         ENDPROC       _WRITEDATA
   -------         PROC          LCDINITIATE
-  C:060AH         LINE#         300
-  C:060AH         LINE#         301
-  C:060AH         LINE#         302
-  C:060EH         LINE#         303
-  C:0611H         LINE#         304
-  C:0611H         LINE#         305
-  C:0614H         LINE#         306
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 11
-
-
-  C:0614H         LINE#         307
-  C:0617H         LINE#         308
-  C:061CH         LINE#         309
-  C:0621H         LINE#         310
-  C:0626H         LINE#         311
-  C:062AH         LINE#         312
-  C:062EH         LINE#         313
-  C:0633H         LINE#         314
+  C:0647H         LINE#         308
+  C:0647H         LINE#         309
+  C:0647H         LINE#         310
+  C:064BH         LINE#         311
+  C:064EH         LINE#         312
+  C:064EH         LINE#         313
+  C:0651H         LINE#         314
+  C:0651H         LINE#         315
+  C:0654H         LINE#         316
+  C:0659H         LINE#         317
+  C:065EH         LINE#         318
+  C:0663H         LINE#         319
+  C:0667H         LINE#         320
+  C:066BH         LINE#         321
+  C:0670H         LINE#         322
   -------         ENDPROC       LCDINITIATE
   -------         PROC          INIT_DS18B20
   -------         DO            
   B:0020H.0       SYMBOL        flag
   -------         ENDDO         
-  C:04A9H         LINE#         326
-  C:04A9H         LINE#         327
-  C:04A9H         LINE#         329
-  C:04ABH         LINE#         330
-  C:04B5H         LINE#         332
-  C:04B7H         LINE#         333
-  C:04C1H         LINE#         335
-  C:04C3H         LINE#         336
-  C:04CDH         LINE#         338
-  C:04D1H         LINE#         339
-  C:04DBH         LINE#         341
-  C:04DDH         LINE#         342
+  C:04E6H         LINE#         333
+  C:04E6H         LINE#         334
+  C:04E6H         LINE#         336
+  C:04E8H         LINE#         337
+  C:04F2H         LINE#         339
+  C:04F4H         LINE#         340
+  C:04FEH         LINE#         342
+  C:0500H         LINE#         343
+  C:050AH         LINE#         345
+  C:050EH         LINE#         346
+  C:0518H         LINE#         348
+  C:051AH         LINE#         349
   -------         ENDPROC       INIT_DS18B20
   -------         PROC          READONECHAR
   -------         DO            
   D:0006H         SYMBOL        i
   D:0007H         SYMBOL        dat
   -------         ENDDO         
-  C:05DBH         LINE#         347
-  C:05DBH         LINE#         348
-  C:05DBH         LINE#         349
-  C:05DDH         LINE#         351
-  C:05DDH         LINE#         352
-  C:05DDH         LINE#         354
-  C:05DFH         LINE#         355
-  C:05E0H         LINE#         356
-  C:05E2H         LINE#         357
-  C:05E6H         LINE#         358
-  C:05E7H         LINE#         359
-  C:05E9H         LINE#         360
-  C:05F3H         LINE#         362
-  C:05F6H         LINE#         363
-  C:05FBH         LINE#         365
-  C:05FBH         LINE#         367
-  C:0605H         LINE#         369
-  C:0609H         LINE#         370
-  C:0609H         LINE#         371
+  C:0618H         LINE#         354
+  C:0618H         LINE#         355
+  C:0618H         LINE#         356
+  C:061AH         LINE#         358
+  C:061AH         LINE#         359
+  C:061AH         LINE#         360
+  C:061CH         LINE#         361
+  C:061DH         LINE#         362
+  C:061FH         LINE#         363
+  C:0623H         LINE#         364
+  C:0624H         LINE#         365
+  C:0626H         LINE#         366
+  C:0630H         LINE#         368
+  C:0633H         LINE#         369
+  C:0638H         LINE#         371
+  C:0638H         LINE#         373
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 12
+
+
+  C:0642H         LINE#         375
+  C:0646H         LINE#         376
+  C:0646H         LINE#         377
   -------         ENDPROC       READONECHAR
   -------         PROC          _WRITEONECHAR
   D:0007H         SYMBOL        dat
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:0512H         LINE#         376
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 12
-
-
-  C:0512H         LINE#         377
-  C:0512H         LINE#         378
-  C:0514H         LINE#         379
-  C:0514H         LINE#         380
-  C:0514H         LINE#         381
-  C:0516H         LINE#         382
-  C:0517H         LINE#         383
-  C:0519H         LINE#         384
-  C:051DH         LINE#         386
-  C:0527H         LINE#         388
-  C:0529H         LINE#         389
-  C:0533H         LINE#         391
-  C:0537H         LINE#         392
-  C:053BH         LINE#         393
-  C:0545H         LINE#         395
+  C:054FH         LINE#         382
+  C:054FH         LINE#         383
+  C:054FH         LINE#         384
+  C:0551H         LINE#         385
+  C:0551H         LINE#         386
+  C:0551H         LINE#         387
+  C:0553H         LINE#         388
+  C:0554H         LINE#         389
+  C:0556H         LINE#         390
+  C:055AH         LINE#         392
+  C:0564H         LINE#         394
+  C:0566H         LINE#         395
+  C:0570H         LINE#         397
+  C:0574H         LINE#         398
+  C:0578H         LINE#         399
+  C:0582H         LINE#         401
   -------         ENDPROC       _WRITEONECHAR
   -------         PROC          DISPLAY_ERROR
   -------         DO            
   D:0001H         SYMBOL        i
   -------         ENDDO         
-  C:0736H         LINE#         402
-  C:0736H         LINE#         403
-  C:0736H         LINE#         405
-  C:073BH         LINE#         406
-  C:073DH         LINE#         407
-  C:0745H         LINE#         408
-  C:0745H         LINE#         409
-  C:0748H         LINE#         410
-  C:0749H         LINE#         411
-  C:0750H         LINE#         412
-  C:0752H         LINE#         413
+  C:077AH         LINE#         408
+  C:077AH         LINE#         409
+  C:077AH         LINE#         411
+  C:077FH         LINE#         412
+  C:0781H         LINE#         413
+  C:0789H         LINE#         414
+  C:0789H         LINE#         415
+  C:078CH         LINE#         416
+  C:078DH         LINE#         417
+  C:0794H         LINE#         418
+  C:0796H         LINE#         419
   -------         ENDPROC       DISPLAY_ERROR
   -------         PROC          DISPLAY_SYMBOL
   -------         DO            
   D:0001H         SYMBOL        i
   -------         ENDDO         
-  C:078BH         LINE#         419
-  C:078BH         LINE#         420
-  C:078BH         LINE#         422
-  C:0790H         LINE#         423
-  C:0792H         LINE#         424
-  C:079AH         LINE#         425
-  C:079AH         LINE#         426
-  C:079DH         LINE#         427
-  C:079DH         LINE#         428
-  C:07A0H         LINE#         429
-  C:07A2H         LINE#         430
+  C:0798H         LINE#         425
+  C:0798H         LINE#         426
+  C:0798H         LINE#         428
+  C:079DH         LINE#         429
+  C:079FH         LINE#         430
+  C:07A7H         LINE#         431
+  C:07A7H         LINE#         432
+  C:07AAH         LINE#         433
+  C:07ABH         LINE#         434
+  C:07B2H         LINE#         435
+  C:07B4H         LINE#         436
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 13
+
+
   -------         ENDPROC       DISPLAY_SYMBOL
   -------         PROC          DISPLAY_DOT
-  C:07CEH         LINE#         435
-  C:07CEH         LINE#         436
-  C:07CEH         LINE#         437
-  C:07D3H         LINE#         438
-  C:07D8H         LINE#         439
+  C:081BH         LINE#         441
+  C:081BH         LINE#         442
+  C:081BH         LINE#         443
+  C:0820H         LINE#         444
+  C:0825H         LINE#         445
   -------         ENDPROC       DISPLAY_DOT
   -------         PROC          DISPLAY_CENT
   -------         DO            
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 13
-
-
   D:0001H         SYMBOL        i
   -------         ENDDO         
-  C:07A3H         LINE#         444
-  C:07A3H         LINE#         445
-  C:07A3H         LINE#         447
-  C:07A8H         LINE#         448
-  C:07AAH         LINE#         449
-  C:07B2H         LINE#         450
-  C:07B2H         LINE#         451
-  C:07B5H         LINE#         452
+  C:07B5H         LINE#         450
+  C:07B5H         LINE#         451
   C:07B5H         LINE#         453
-  C:07B8H         LINE#         454
-  C:07BAH         LINE#         455
+  C:07BAH         LINE#         454
+  C:07BCH         LINE#         455
+  C:07C4H         LINE#         456
+  C:07C4H         LINE#         457
+  C:07C7H         LINE#         458
+  C:07C8H         LINE#         459
+  C:07CFH         LINE#         460
+  C:07D1H         LINE#         461
   -------         ENDPROC       DISPLAY_CENT
   -------         PROC          _DISPLAY_TEMP1
   D:0007H         SYMBOL        x
@@ -743,126 +753,128 @@ SYMBOL TABLE OF MODULE:  UltraSonic (ULTRASONIC)
   D:0005H         SYMBOL        k
   D:0004H         SYMBOL        l
   -------         ENDDO         
-  C:0546H         LINE#         460
-  C:0546H         LINE#         461
-  C:0546H         LINE#         463
-  C:054CH         LINE#         464
-  C:0558H         LINE#         465
-  C:055FH         LINE#         466
-  C:0564H         LINE#         467
-  C:0567H         LINE#         468
-  C:056DH         LINE#         469
-  C:0573H         LINE#         470
+  C:0583H         LINE#         466
+  C:0583H         LINE#         467
+  C:0583H         LINE#         469
+  C:0589H         LINE#         470
+  C:0595H         LINE#         471
+  C:059CH         LINE#         472
+  C:05A1H         LINE#         473
+  C:05A4H         LINE#         474
+  C:05AAH         LINE#         475
+  C:05B0H         LINE#         476
   -------         ENDPROC       _DISPLAY_TEMP1
   -------         PROC          _DISPLAY_TEMP2
   D:0006H         SYMBOL        x
-  C:07DFH         LINE#         476
-  C:07E1H         LINE#         477
-  C:07E1H         LINE#         478
-  C:07E6H         LINE#         479
-  C:07E9H         LINE#         480
+  C:082CH         LINE#         482
+  C:082EH         LINE#         483
+  C:082EH         LINE#         484
+  C:0833H         LINE#         485
+  C:0836H         LINE#         486
   -------         ENDPROC       _DISPLAY_TEMP2
   -------         PROC          READYREADTEMP
-  C:068AH         LINE#         485
-  C:068AH         LINE#         486
-  C:068AH         LINE#         487
-  C:068DH         LINE#         488
-  C:0692H         LINE#         489
-  C:0697H         LINE#         490
-  C:06A1H         LINE#         491
-  C:06A4H         LINE#         492
-  C:06A9H         LINE#         493
+  C:06CEH         LINE#         491
+  C:06CEH         LINE#         492
+  C:06CEH         LINE#         493
+  C:06D1H         LINE#         494
+  C:06D6H         LINE#         495
+  C:06DBH         LINE#         496
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 14
+
+
+  C:06E5H         LINE#         497
+  C:06E8H         LINE#         498
+  C:06EDH         LINE#         499
   -------         ENDPROC       READYREADTEMP
   -------         PROC          MAIN
   -------         DO            
   D:0008H         SYMBOL        TL
-  D:0009H         SYMBOL        TH
-  D:000AH         SYMBOL        TN
-  D:000BH         SYMBOL        TD
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 14
-
-
+  D:0007H         SYMBOL        TH
+  D:0009H         SYMBOL        TN
+  D:0001H         SYMBOL        TD
+  D:000AH         SYMBOL        fflag
   -------         ENDDO         
-  C:01E1H         LINE#         503
-  C:01E1H         LINE#         504
   C:01E1H         LINE#         509
-  C:01E3H         LINE#         510
-  C:01E6H         LINE#         511
-  C:01E9H         LINE#         512
-  C:01ECH         LINE#         513
-  C:01F1H         LINE#         514
-  C:01FCH         LINE#         515
-  C:0205H         LINE#         516
-  C:020CH         LINE#         517
-  C:0217H         LINE#         518
-  C:0220H         LINE#         519
-  C:0225H         LINE#         520
-  C:0228H         LINE#         521
-  C:022BH         LINE#         522
-  C:022EH         LINE#         523
-  C:0231H         LINE#         524
-  C:0231H         LINE#         525
-  C:0231H         LINE#         526
-  C:0238H         LINE#         527
-  C:023BH         LINE#         528
-  C:023BH         LINE#         530
-  C:023BH         LINE#         531
-  C:023EH         LINE#         532
-  C:0241H         LINE#         533
-  C:0246H         LINE#         534
-  C:024BH         LINE#         535
-  C:0259H         LINE#         537
-  C:0270H         LINE#         539
-  C:0275H         LINE#         540
-  C:027AH         LINE#         541
-  C:0285H         LINE#         542
-  C:028EH         LINE#         543
-  C:0291H         LINE#         544
-  C:0298H         LINE#         545
+  C:01E1H         LINE#         510
+  C:01E1H         LINE#         516
+  C:01ECH         LINE#         517
+  C:01EEH         LINE#         518
+  C:01F1H         LINE#         519
+  C:01F4H         LINE#         520
+  C:01F7H         LINE#         521
+  C:01FCH         LINE#         522
+  C:0207H         LINE#         523
+  C:0210H         LINE#         524
+  C:0217H         LINE#         525
+  C:0222H         LINE#         526
+  C:022BH         LINE#         527
+  C:0230H         LINE#         528
+  C:0233H         LINE#         529
+  C:0236H         LINE#         530
+  C:0239H         LINE#         531
+  C:023CH         LINE#         532
+  C:023CH         LINE#         533
+  C:023CH         LINE#         534
+  C:0243H         LINE#         539
+  C:0246H         LINE#         540
+  C:024BH         LINE#         541
+  C:024EH         LINE#         542
+  C:025BH         LINE#         544
+  C:0270H         LINE#         545
+  C:0277H         LINE#         551
+  C:028DH         LINE#         553
+  C:0292H         LINE#         554
+  C:0297H         LINE#         555
+  C:02A2H         LINE#         556
+  C:02A8H         LINE#         557
+  C:02B1H         LINE#         558
+  C:02B1H         LINE#         559
+  C:02B4H         LINE#         560
+  C:02BBH         LINE#         561
   -------         ENDPROC       MAIN
   -------         PROC          TIMER0
-  C:06D1H         LINE#         554
-  C:06D5H         LINE#         556
-  C:06D7H         LINE#         557
-  C:06DAH         LINE#         558
-  C:06DDH         LINE#         559
-  C:06DFH         LINE#         560
-  C:06E4H         LINE#         561
-  C:06E4H         LINE#         562
-  C:06E6H         LINE#         563
-  C:06E9H         LINE#         564
-  C:06ECH         LINE#         565
-  C:06EFH         LINE#         566
-  C:06EFH         LINE#         567
+  C:0715H         LINE#         570
+  C:0719H         LINE#         572
+  C:071BH         LINE#         573
+  C:071EH         LINE#         574
+  C:0721H         LINE#         575
+  C:0723H         LINE#         576
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/03/2017  19:47:28  PAGE 15
+
+
+  C:0728H         LINE#         577
+  C:0728H         LINE#         578
+  C:072AH         LINE#         579
+  C:072DH         LINE#         580
+  C:0730H         LINE#         581
+  C:0733H         LINE#         582
+  C:0733H         LINE#         583
   -------         ENDPROC       TIMER0
   -------         ENDMOD        ULTRASONIC
 
   -------         MODULE        ?C?CLDPTR
   C:000EH         PUBLIC        ?C?CLDPTR
-BL51 BANKED LINKER/LOCATER V6.22                                                      07/02/2017  18:12:14  PAGE 15
-
-
   -------         ENDMOD        ?C?CLDPTR
 
   -------         MODULE        ?C?IMUL
   C:0027H         PUBLIC        ?C?IMUL
   -------         ENDMOD        ?C?IMUL
 
+  -------         MODULE        ?C?UIDIV
+  C:0039H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
   -------         MODULE        ?C?SIDIV
-  C:0039H         PUBLIC        ?C?SIDIV
+  C:008EH         PUBLIC        ?C?SIDIV
   -------         ENDMOD        ?C?SIDIV
 
   -------         MODULE        ?C?LMUL
-  C:006FH         PUBLIC        ?C?LMUL
+  C:00C4H         PUBLIC        ?C?LMUL
   -------         ENDMOD        ?C?LMUL
 
   -------         MODULE        ?C?SLDIV
-  C:0465H         PUBLIC        ?C?SLDIV
+  C:04A2H         PUBLIC        ?C?SLDIV
   -------         ENDMOD        ?C?SLDIV
-
-  -------         MODULE        ?C?UIDIV
-  C:00BEH         PUBLIC        ?C?UIDIV
-  -------         ENDMOD        ?C?UIDIV
 
   -------         MODULE        ?C?ULDIV
   C:014FH         PUBLIC        ?C?ULDIV
@@ -871,5 +883,5 @@ SYMBOL TABLE OF MODULE:  UltraSonic (ULTRASONIC)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?LCDINITIATE?ULTRASONIC
 
-Program Size: data=103.1 xdata=0 code=2084
+Program Size: data=107.1 xdata=0 code=2161
 LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
