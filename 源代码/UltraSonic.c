@@ -7,34 +7,32 @@
 #define uint unsigned int
 #define VELOCITY_30C	3495       //30ÉãÊÏ¶ÈÊ±µÄÉùËÙ£¬ÉùËÙV= 331.5 + 0.6*ÎÂ¶È£» 
 //#define VELOCITY_23C	3453       //23ÉãÊÏ¶ÈÊ±µÄÉùËÙ£¬ÉùËÙV= 331.5 + 0.6*ÎÂ¶È£» 
-#define BASIC 3315
-#define lambda 6
 /************************************Î»¶¨Òå************************************/
 sbit INPUT  = P3^2;                //»ØÉù½ÓÊÕ¶Ë¿Ú
-sbit OUTPUT = P1^5;                //³¬Éù´¥·¢¶Ë¿Ú
+sbit OUTPUT = P3^6;                  //³¬Éù´¥·¢¶Ë¿Ú
 sbit Beep   = P2^3;			           // ·äÃùÆ÷
 sbit DS     = P2^2;                //define interface
 sbit E=P2^5;            //Ê¹ÄÜĞÅºÅÎ»£¬½«EÎ»¶¨ÒåÎªP2.5Òı½Å
 sbit BF=P0^7;           //Ã¦Âµ±êÖ¾Î»£¬£¬½«BFÎ»¶¨ÒåÎªP0.7Òı½Å
 /********************************¶¨Òå±äÁ¿ºÍÊı×é********************************/
 long int distance=0;               //¾àÀë±äÁ¿
-uchar table[]="  Designed by  "; 
-uchar table0[]="WeiLu and YuYaojia";
+uchar table[]="   Designed by  "; 
+uchar table0[]="WeiLu & YuYaojia";
 uchar table1[]="There's no echo.";
-uchar table2[]="  www.hjmcu.com  ";
 uchar table3[]="Distance:";
 unsigned char code digit[10]={"0123456789"};     //¶¨Òå×Ö·ûÊı×éÏÔÊ¾Êı×Ö
 unsigned char code Str[]={"Test by DS18B20"};    //ËµÃ÷ÏÔÊ¾µÄÊÇÎÂ¶È
 unsigned char code Error[]={"Error!Check!"};     //ËµÃ÷Ã»ÓĞ¼ì²âµ½DS18B20
-unsigned char code Temp[]={"Temp:"};             //ËµÃ÷ÏÔÊ¾µÄÊÇÎÂ¶È
-unsigned char code Cent[]={"Cent"};              //ÎÂ¶Èµ¥Î»
+unsigned char code Temp[]={"T:"};             //ËµÃ÷ÏÔÊ¾µÄÊÇÎÂ¶È
+unsigned char code V[]={"V:"};              //ÎÂ¶Èµ¥Î»
 uchar count;
 /***********************************º¯ÊıÉùÃ÷***********************************/
-extern void initLCD();
+extern void initLCD();//³õÊ¼»¯LCD
 extern void write_date(uchar date);
 extern void write_com(uchar com);
 extern void delay(uint x);
-long int VELOCITY;       //23ÉãÊÏ¶ÈÊ±µÄÉùËÙ£¬ÉùËÙV= 331.5 + 0.6*ÎÂ¶È£»
+long int VELOCITY = 3453;       //ÉãÊÏ¶ÈÊ±µÄÉùËÙ£¬ÉùËÙV= 331.5 + 0.6*ÎÂ¶È£»
+int fdebug;
 /******************************************************************************/
 /* º¯ÊıÃû³Æ  : Delay_xMs                                                      */
 /* º¯ÊıÃèÊö  : ÑÓÊ±º¯Êı                                                       */
@@ -57,7 +55,7 @@ void Delay_xMs(unsigned int x)
 /* º¯ÊıÃû³Æ  : Alarm                                                          */
 /* º¯ÊıÃèÊö  : ·äÃùÆ÷·¢Éùº¯Êı                                                 */
 /* ÊäÈë²ÎÊı  : t                                                              */
-/* ²ÎÊıÃèÊö  : ·¢ÉùµÄ´ÆµÂÊ                                                     */
+/* ²ÎÊıÃèÊö  : ·¢ÉùµÄÆµÂÊ                                                     */
 /* ·µ»ØÖµ    : ÎŞ                                                             */
 /******************************************************************************/
 void Alarm(uchar t)
@@ -114,7 +112,7 @@ void Init_MCU(void)
 void Init_Parameter(void)
 {
 	 OUTPUT =0;//³¬ÉùÊä³ö¹Ø±Õ
-	 INPUT = 0;//³¬ÉùÊäÈë¹Ø±Õ
+	 INPUT = 1;//³¬ÉùÊäÈë¹Ø±Õ
 	 count = 0;
 	 distance = 0;
 }
@@ -158,6 +156,21 @@ void display(int number,uchar address)
   write_date(99);           //"c"µÄASCII
 	write_date(109);          //"m"µÄASCII
 }
+void displayv(int number,uchar address)
+{
+	uchar b,c,d,e;
+	b= (number / 1000);
+	c= (number / 100) % 10;
+	d = (number / 10) % 10;
+	e = number % 10;
+	write_com(0x80 + address);
+  write_date(b + 48);
+	write_date(c + 48);
+	write_date(d + 48);
+	write_date(46);           //Ğ¡ÊıµãµÄASCII
+	write_date(e + 48);
+	write_date(109);          //"m"µÄASCII
+}
 /******************************************************************************/
 /* º¯ÊıÃû³Æ  : Trig_SuperSonic                                                */
 /* º¯ÊıÃèÊö  : ·¢³öÉù²¨º¯Êı                                                   */
@@ -165,33 +178,42 @@ void display(int number,uchar address)
 /* ²ÎÊıÃèÊö  : ·¢³öµÄÂö³å´ÎÊı                                                 */
 /* ·µ»ØÖµ    : ÎŞ                                                             */
 /******************************************************************************/
-void Trig_SuperSonic(int i)//³ö·¢Éù²¨40kHz
+void Trig_SuperSonic()//³ö·¢Éù²¨40kHz
 {
-	int j;
-	for(j=0;j<i;j++)
-	{
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-	  _nop_();
-	  _nop_();
-	  _nop_();
-	  _nop_();
-	  OUTPUT = 1;
-	  _nop_();
-	 	_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-	  _nop_();
-	  _nop_();
-	  _nop_();
-		_nop_();
-	  OUTPUT = 0;
-	}
+	////////////////////////////////////////////////////////////////////////////////////////////
+	  OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+//		/////////////////////////////////////////////////////////////
 }
 /******************************************************************************/
 /* º¯ÊıÃû³Æ  : Measure_Distance                                               */
@@ -203,19 +225,17 @@ void Trig_SuperSonic(int i)//³ö·¢Éù²¨40kHz
 int Measure_Distance(void)
 {
 	uchar l;
+	int ii;
 	uint h,y;
-	TR0 = 1;
-	while(INPUT==0)
+	ii=1;
+	while(INPUT)
+	{
+		if(count ==17)
 		{
-			if(count==18)
-				{		
-					TR0 =0;
-		      TL0 = 0x66;
-		      TH0 = 0xfc;
-		      count = 0;
-				}
-				return 0;
-    }	
+			ii = 0;
+			break;
+		}
+  }
 	TR0 = 0;
 	l = TL0;
 	h = TH0;
@@ -226,7 +246,7 @@ int Measure_Distance(void)
 	TH0 = 0xfc;
 	delayt(30);
 	distance = VELOCITY * distance / 20000;
-	return 1;
+	return ii;
 }
 /*****************************************************
 º¯Êı¹¦ÄÜ£ºÅĞ¶ÏÒº¾§Ä£¿éµÄÃ¦Âµ×´Ì¬
@@ -418,47 +438,7 @@ void display_error(void)
 		}	
 	while(1)              //½øÈëËÀÑ­»·£¬µÈ´ı²éÃ÷Ô­Òò
 				  ;
-}
-/*****************************************************
-º¯Êı¹¦ÄÜ£ºÏÔÊ¾ÎÂ¶È·ûºÅ
-***************************************************/   
-void display_symbol(void)
-{
-	unsigned char i;
-	WriteAddress(0x00);    //Ğ´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ2ĞĞµÚ1ÁĞ¿ªÊ¼ÏÔÊ¾
-	i = 0;                //´ÓµÚÒ»¸ö×Ö·û¿ªÊ¼ÏÔÊ¾
-	while(Temp[i] != '\0')  //Ö»ÒªÃ»ÓĞĞ´µ½½áÊø±êÖ¾£¬¾Í¼ÌĞøĞ´
-		{
-			WriteData(Temp[i]);   //½«×Ö·û³£Á¿Ğ´ÈëLCD
-			i++;                 //Ö¸ÏòÏÂÒ»¸ö×Ö·û
-			Delay_xMs(50);        //ÑÓÊ±1ms¸øÓ²¼şÒ»µã·´Ó¦Ê±¼ä
-		}	
-}
-
-/*****************************************************
-º¯Êı¹¦ÄÜ£ºÏÔÊ¾ÎÂ¶ÈµÄĞ¡Êıµã
-***************************************************/   
-void 	display_dot(void)
-{
-	WriteAddress(0x09);	  //Ğ´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ2ĞĞµÚ10ÁĞ¿ªÊ¼ÏÔÊ¾		   
-	WriteData('.');      //½«Ğ¡ÊıµãµÄ×Ö·û³£Á¿Ğ´ÈëLCD
-	Delay_xMs(50);         //ÑÓÊ±1ms¸øÓ²¼şÒ»µã·´Ó¦Ê±¼ä		
-}
-/*****************************************************
-º¯Êı¹¦ÄÜ£ºÏÔÊ¾ÎÂ¶ÈµÄµ¥Î»(Cent)
-***************************************************/   
-void 	display_cent(void)
-{
-  unsigned char i;    
-	WriteAddress(0x0c);        //Ğ´ÏÔÊ¾µØÖ·£¬½«ÔÚµÚ2ĞĞµÚ13ÁĞ¿ªÊ¼ÏÔÊ¾	
-	i = 0;                    //´ÓµÚÒ»¸ö×Ö·û¿ªÊ¼ÏÔÊ¾ 
-	while(Cent[i] != '\0')     //Ö»ÒªÃ»ÓĞĞ´µ½½áÊø±êÖ¾£¬¾Í¼ÌĞøĞ´
-		{
-			WriteData(Cent[i]);     //½«×Ö·û³£Á¿Ğ´ÈëLCD
-	    i++;                 //Ö¸ÏòÏÂÒ»¸ö×Ö·û
-	    Delay_xMs(50);        //ÑÓÊ±1ms¸øÓ²¼şÒ»µã·´Ó¦Ê±¼ä
-	  }	
-}
+} 
 /*****************************************************
 º¯Êı¹¦ÄÜ£ºÏÔÊ¾ÎÂ¶ÈµÄÕûÊı²¿·Ö
 Èë¿Ú²ÎÊı£ºx
@@ -469,7 +449,7 @@ void display_temp1(unsigned char x)
   j=x/100;              //È¡°ÙÎ»
 	k=(x%100)/10;    //È¡Ê®Î»
 	l=x%10;             //È¡¸öÎ»  
-	WriteAddress(0x06);    //Ğ´ÏÔÊ¾µØÖ·,½«ÔÚµÚ2ĞĞµÚ7ÁĞ¿ªÊ¼ÏÔÊ¾
+	WriteAddress(0x02);    //Ğ´ÏÔÊ¾µØÖ·,½«ÔÚµÚ2ĞĞµÚ7ÁĞ¿ªÊ¼ÏÔÊ¾
 	WriteData(digit[j]);    //½«°ÙÎ»Êı×ÖµÄ×Ö·û³£Á¿Ğ´ÈëLCD
 	WriteData(digit[k]);    //½«Ê®Î»Êı×ÖµÄ×Ö·û³£Á¿Ğ´ÈëLCD
 	WriteData(digit[l]);    //½«¸öÎ»Êı×ÖµÄ×Ö·û³£Á¿Ğ´ÈëLCD
@@ -481,7 +461,7 @@ void display_temp1(unsigned char x)
 ***************************************************/ 
  void display_temp2(unsigned char x)
 {
- 	WriteAddress(0x0a);      //Ğ´ÏÔÊ¾µØÖ·,½«ÔÚµÚ2ĞĞµÚ11ÁĞ¿ªÊ¼ÏÔÊ¾
+ 	WriteAddress(0x06);      //Ğ´ÏÔÊ¾µØÖ·,½«ÔÚµÚ2ĞĞµÚ11ÁĞ¿ªÊ¼ÏÔÊ¾
 	WriteData(digit[x]);     //½«Ğ¡Êı²¿·ÖµÄµÚÒ»Î»Êı×Ö×Ö·û³£Á¿Ğ´ÈëLCD
 	Delay_xMs(50);          //ÑÓÊ±1ms¸øÓ²¼şÒ»µã·´Ó¦Ê±¼ä
 }
@@ -513,41 +493,57 @@ void main(void)
   unsigned char TN;      //´¢´æÎÂ¶ÈµÄÕûÊı²¿·Ö
 	unsigned char TD;       //´¢´æÎÂ¶ÈµÄĞ¡Êı²¿·Ö
 	int fflag;
+	fdebug=0;
 	VELOCITY=3453;       //23ÉãÊÏ¶ÈÊ±µÄÉùËÙ£¬ÉùËÙV= 331.5 + 0.6*ÎÂ¶È£»
   RW = 0;
 	initLCD();
 	Init_MCU();
 	Init_Parameter();
-	Alarm(2);
+	//Alarm(2);
 	display_char(table,0x00);
 	display_char(table0,0x40);
 	Delay_xMs(30000);
-	display_char(table2,0x00);
+	display_char(table0,0x00);
 	display_char(table1,0x40);
 	if(Init_DS18B20()==1)
 		display_error();
-  display_symbol();    //ÏÔÊ¾ÎÂ¶ÈËµÃ÷
-  display_dot();       //ÏÔÊ¾ÎÂ¶ÈµÄĞ¡Êıµã
-  display_cent();      //ÏÔÊ¾ÎÂ¶ÈµÄµ¥Î»
+	display_char(Temp,0x00);
+	display_char(".",0x05);
+	display_char(V,0x08);
 	while(1)
 	{
-		 Trig_SuperSonic(8);         //´¥·¢³¬Éù²¨·¢Éä
-//		 while(INPUT == 0)          //µÈ´ı»ØÉù
-//         {
-//             ;
-//         }
+		fflag=0;
+		Init_Parameter();
+		TR0 = 1;
+	  OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+		OUTPUT = 1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();
+	  OUTPUT = 0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();		
+		//Trig_SuperSonic();         //´¥·¢³¬Éù²¨·¢Éä
+//		TR0 = 1; 
+//Delay_xMs(1);
+		//TR0 = 1; 
+		 while(INPUT==0)          //µÈ´ı»ØÉù
+         {
+//             if (count==17)
+//							 break;
+         }
+//				 Alarm(2);
+		 fflag=Measure_Distance();        //¼ÆËãÂö¿í²¢×ª»»Îª¾àÀë
 		 ReadyReadTemp();     //¶ÁÎÂ¶È×¼±¸
 	   TL=ReadOneChar();    //ÏÈ¶ÁµÄÊÇÎÂ¶ÈÖµµÍÎ»
 		 TH=ReadOneChar();    //½Ó×Å¶ÁµÄÊÇÎÂ¶ÈÖµ¸ßÎ»
 		 TN=TH*16+TL/16;      //Êµ¼ÊÎÂ¶ÈÖµ=(TH*256+TL)/16,¼´£ºTH*16+TL/16
 			                  //ÕâÑùµÃ³öµÄÊÇÎÂ¶ÈµÄÕûÊı²¿·Ö,Ğ¡Êı²¿·Ö±»¶ªÆúÁË
 		 VELOCITY=3315+6*TN;// 331.5 + 0.6*ÎÂ¶È£»
-		 fflag=Measure_Distance();        //¼ÆËãÂö¿í²¢×ª»»Îª¾àÀë
-//		 ReadyReadTemp();     //¶ÁÎÂ¶È×¼±¸
-//	   TL=ReadOneChar();    //ÏÈ¶ÁµÄÊÇÎÂ¶ÈÖµµÍÎ»
-//		 TH=ReadOneChar();    //½Ó×Å¶ÁµÄÊÇÎÂ¶ÈÖµ¸ßÎ»
-//		 TN=TH*16+TL/16;      //Êµ¼ÊÎÂ¶ÈÖµ=(TH*256+TL)/16,¼´£ºTH*16+TL/16
-			                  //ÕâÑùµÃ³öµÄÊÇÎÂ¶ÈµÄÕûÊı²¿·Ö,Ğ¡Êı²¿·Ö±»¶ªÆúÁË
 	   TD=(TL%16)*10/16;    //¼ÆËãÎÂ¶ÈµÄĞ¡Êı²¿·Ö,½«ÓàÊı³ËÒÔ10ÔÙ³ıÒÔ16È¡Õû£¬
 			                  //ÕâÑùµÃµ½µÄÊÇÎÂ¶ÈĞ¡Êı²¿·ÖµÄµÚÒ»Î»Êı×Ö(±£Áô1Î»Ğ¡Êı)
 	   display_temp1(TN);    //ÏÔÊ¾ÎÂ¶ÈµÄÕûÊı²¿·Ö
@@ -556,8 +552,9 @@ void main(void)
 		 if(fflag){
 		 display(distance,0x49);    //ÏÔÊ¾¾àÀë
 		 }
+		 displayv(VELOCITY,0x0a);
 		 Init_Parameter();          // ²ÎÊıÖØĞÂ³õÊ¼»¯
-		 delayt(100);               //ÑÓÊ±£¬Á½´Î·¢ÉäÖ®¼äÒªÖÁÉÙÓĞ10ms¼ä¸ô
+		 delayt(1000);               //ÑÓÊ±£¬Á½´Î·¢ÉäÖ®¼äÒªÖÁÉÙÓĞ10ms¼ä¸ô
 	 }	
 }
 /******************************************************************************/
@@ -565,7 +562,7 @@ void main(void)
 /* º¯ÊıÃèÊö  : T0ÖĞ¶Ï´¦Àíº¯Êı                                                 */
 /* ÊäÈë²ÎÊı  : ÎŞ                                                             */
 /* ²ÎÊıÃèÊö  : ÎŞ                                                             */
-/* ·µ»ØÖµ    : ÎŞ                                                             */
+/* ·µ»ØÖµ    : ÎŞ                                                              */
 /******************************************************************************/
 void timer0 (void) interrupt 1
 {
@@ -576,7 +573,7 @@ void timer0 (void) interrupt 1
 	if(count == 18)//³¬Éù²¨»ØÉùÂö¿í×î¶à18ms
 	{
 		TR0 =0;
-		TL0 = 0x66;
+		TL0 = 0x66; 
 		TH0 = 0xfc;
 		count = 0;
 	}
